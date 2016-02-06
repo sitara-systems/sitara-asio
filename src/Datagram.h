@@ -9,7 +9,7 @@ namespace ofxAsio {
   public:
     Datagram() {
       mMessage = "";
-      mEndpoint = 
+	  mEndpoint = Endpoint();
     }
 
     Datagram(std::string msg, std::string ipAddress, int port) {

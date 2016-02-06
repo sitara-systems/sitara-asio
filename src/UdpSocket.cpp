@@ -2,30 +2,28 @@
 
 using namespace ofxAsio;
 
-  UdpSocket::UdpSocket() {
-    mSocket = mService;
-    mSocket.open(asio::ip::udp::v4());
-    mLocalEndpoint = Endpoint(asio::ip::udp::v4(), 0);
+  UdpSocket::UdpSocket() : mSocket(mService), mLocalEndpoint(asio::ip::udp::endpoint(asio::ip::address_v4::any(), 0)) {
   }
 
-  UdpSocket::UdpSocket(int port) {
-    mLocalEndpoint = Endpoint(asio::ip::udp::v4(), port);
-    mSocket(mService, mLocalEndpoint);
+  UdpSocket::UdpSocket(int port) : mSocket(mService, asio::ip::udp::endpoint(asio::ip::udp::v4(), port)), 
+									mLocalEndpoint(asio::ip::udp::endpoint(asio::ip::address_v4::any(), port)) {
   }
 
-  UdpSocket::UdpSocket(std::string localAddress, int port) {
-    mLocalEndpoint = Endpoint(localAddress, port);
-    mSocket(mService, mLocalEndpoint);
+  UdpSocket::UdpSocket(std::string localAddress, int port) : mSocket(mService, asio::ip::udp::endpoint(asio::ip::address::from_string(localAddress), port)), 
+																mLocalEndpoint(asio::ip::udp::endpoint(asio::ip::address::from_string(localAddress), port)) {
+  }
+
+  UdpSocket::~UdpSocket() {
   }
 
   bool UdpSocket::send(std::shared_ptr<Datagram> datagram) {
     asio::error_code errorCode;
     std::string message = datagram->getMessage();
-    Endpoint endpoint = datagram->getEndPoint();
+    Endpoint endpoint = datagram->getEndpoint();
    
-    asio::buffer buffer = asio::buffer(message);
-    
-    mSocket.send_to(buffer, endPoint, 0, errorCode);
+    asio::buffer buffer(message, message.length());
+
+	mSocket.send_to(buffer, endpoint.getAsioEndpoint(), 0, errorCode);
     
     if (errorCode) {
       std::printf("ofxAsio::UdpSocket::send -- Cannot send data. %s", errorCode.message());
@@ -43,11 +41,11 @@ using namespace ofxAsio;
     message.resize(bufferSize);
 
     asio::buffer buffer = asio::buffer(dataGram->getMessage());
-    int receivedSize = mSocket.receive_from(buffer, datagram->getEndPoint(), 0, errorCode);
+    int receivedSize = mSocket.receive_from(buffer, datagram->getEndpoint().getAsioEndpoint(), 0, errorCode);
 
     if (errorCode) {
       std::printf("ofxAsio::UdpSocket::receive -- Cannot recieve data. %s", errorCode.message());
-      return shared_ptr<Datagram>();
+      return std::shared_ptr<Datagram>();
     }
     else {
       message.resize(receivedSize);
@@ -57,11 +55,9 @@ using namespace ofxAsio;
   }
 
   void setOnReceive(std::function<void(std::shared_ptr<Datagram> msg)> response) {
-    mOnReceiveFunction = response;
-  }
+	  mOnReceiveFunction = response;
+  };
 
   void setOnSend(std::function<void(std::shared_ptr<Datagram> msg)> response) {
-    mOnSendFunction = response;
+	  mOnSendFunction = response;
   }
-
-}

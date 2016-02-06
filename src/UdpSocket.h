@@ -27,8 +27,8 @@ namespace ofxAsio {
     asio::io_service mService;
     asio::ip::udp::socket mSocket;
     Endpoint mLocalEndpoint;
-    std::function<void(Datagram msg)> mOnReceiveFunction;
-    std::function<void(Datagram msg)> mOnSendFunction;
+    std::function<void(std::shared_ptr<Datagram> msg)> mOnReceiveFunction;
+    std::function<void(std::shared_ptr<Datagram> msg)> mOnSendFunction;
   };
   
 }
