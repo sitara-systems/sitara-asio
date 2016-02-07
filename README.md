@@ -8,6 +8,10 @@ You'll need to point your IDE to the ASIO library in the `libs/` folder.  There 
 This addon has been tested with openFrameworks v0.9.1
 
 ## Usage
+* `Endpoint` is the combination of an ip address and a port number.  This represents the destination for datagrams.
+* `Datagram` is a class that contains a message and a destination endpoint.
+* `UdpSender` is a class for sending UDP messages.
+* `UdpReceiver` is a class for receiving UDP messages.
 
 ## Examples
 

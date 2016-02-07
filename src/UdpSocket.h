@@ -17,7 +17,7 @@ namespace ofxAsio {
     UdpSocket(std::string localAddress, int port);
     ~UdpSocket();
     bool send(std::shared_ptr<Datagram> msg);
-    std::shared_ptr<Datagram> receive(size_t bufferSize = 9216);
+    std::shared_ptr<Datagram> receive(size_t bufferSize = 1024);
     void setOnReceive(std::function<void(std::shared_ptr<Datagram> msg)> response);
     void setOnSend(std::function<void(std::shared_ptr<Datagram> msg)> response);
   protected:
