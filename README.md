@@ -3,7 +3,14 @@
 A wrapper to simplify using the ASIO library in openFrameworks.
 
 ## Requirements
-You'll need to point your IDE to the ASIO library in the `libs/` folder.  There is a property sheet in `config` that will do this for you.
+This addon unfortunately does *NOT* work with the project generator, due to ofxAsio being a header-only library and oddities with how the project generators adds libraries.
+
+You'll need to point your IDE to the ASIO library in the `libs/` folder.  There is a property sheet in the `config` folder that will do this for you in Visual Studio.  What this property sheet does is:
+
+* Add `ASIO_STANDLONE` and `_WIN32_WINNT=0x0501` to the PreProcessor definitions.
+* Make sure `asio-1.10.6\include` is added to your include paths.
+
+After doing this, you'll need to add all files in `ofxAsio\src` to your project to be compiled.
 
 This addon has been tested with openFrameworks v0.9.1
 

@@ -1,11 +1,8 @@
 #include "ofApp.h"
-#include "ofxAsio.h"
 
 //--------------------------------------------------------------
-void ofApp::setup(){
-	asio::io_service service;
-	service.post([] {
-	});
+void ofApp::setup() {
+	std::cout << "Hello world" << std::endl;
 }
 
 //--------------------------------------------------------------
