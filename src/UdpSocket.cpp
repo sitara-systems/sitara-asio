@@ -17,8 +17,8 @@ using namespace ofxAsio;
   }
 
   bool UdpSocket::send(std::shared_ptr<Datagram> datagram) {
-    asio::error_code errorCode;   
-	asio::const_buffers_1 buffer = asio::buffer(datagram->getMessage());
+    asio::error_code errorCode;
+	asio::mutable_buffers_1 buffer = asio::mutable_buffers_1((char*)datagram->getMessage().c_str(), datagram->getMessage().size());
 
 	mSocket.send_to(buffer, datagram->getEndpoint().getAsioEndpoint(), 0, errorCode);
     
@@ -36,7 +36,7 @@ using namespace ofxAsio;
     std::shared_ptr<Datagram> datagram = std::make_shared<Datagram>();
 	datagram->getMessage().resize(bufferSize);
 
-	asio::const_buffers_1 buffer = asio::buffer(datagram->getMessage());
+	asio::mutable_buffers_1 buffer = asio::mutable_buffers_1((char*)datagram->getMessage().c_str(), datagram->getMessage().size());
     int receivedSize = mSocket.receive_from(buffer, datagram->getEndpoint().getAsioEndpoint(), 0, errorCode);
 
     if (errorCode) {

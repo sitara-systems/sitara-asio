@@ -1,7 +1,7 @@
 #include "ofApp.h"
 
 //--------------------------------------------------------------
-void ofApp::setup() {
+void ofApp::setup(){
 	std::cout << "Hello world" << std::endl;
 }
 
