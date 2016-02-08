@@ -6,11 +6,11 @@ using namespace ofxAsio;
   }
 
   UdpSocket::UdpSocket(int port) : mSocket(mService, asio::ip::udp::endpoint(asio::ip::udp::v4(), port)), 
-									mLocalEndpoint(asio::ip::udp::endpoint(asio::ip::address_v4::any(), port)) {
+	  mLocalEndpoint(asio::ip::udp::endpoint(asio::ip::address_v4::any(), port)) {
   }
 
   UdpSocket::UdpSocket(std::string localAddress, int port) : mSocket(mService, asio::ip::udp::endpoint(asio::ip::address::from_string(localAddress), port)), 
-																mLocalEndpoint(asio::ip::udp::endpoint(asio::ip::address::from_string(localAddress), port)) {
+	  mLocalEndpoint(asio::ip::udp::endpoint(asio::ip::address::from_string(localAddress), port)) {
   }
 
   UdpSocket::~UdpSocket() {
@@ -37,7 +37,7 @@ using namespace ofxAsio;
 	datagram->getMessage().resize(bufferSize);
 
 	asio::mutable_buffers_1 buffer = asio::mutable_buffers_1((char*)datagram->getMessage().c_str(), datagram->getMessage().size());
-    int receivedSize = mSocket.receive_from(buffer, datagram->getEndpoint().getAsioEndpoint(), 0, errorCode);
+    size_t receivedSize = mSocket.receive_from(buffer, datagram->getEndpoint().getAsioEndpoint(), 0, errorCode);
 
     if (errorCode) {
       std::printf("ofxAsio::UdpSocket::receive -- Cannot recieve data. %s", errorCode.message().c_str());
