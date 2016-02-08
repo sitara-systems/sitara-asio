@@ -17,7 +17,7 @@ namespace ofxAsio {
     UdpSender(std::string localAddress, int port);
     ~UdpSender();
   protected:
-	  virtual void on_send(asio::error_code errorCode, std::size_t bytes_transferred) {};
+	  void on_send(asio::error_code errorCode, std::size_t bytes_transferred) {};
   };
   
 }

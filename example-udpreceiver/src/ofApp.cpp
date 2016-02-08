@@ -5,7 +5,7 @@
 void ofApp::setup(){
 	asio::io_service service;
 	service.post([] {
-  });
+	});
 }
 
 //--------------------------------------------------------------

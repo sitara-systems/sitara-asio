@@ -22,7 +22,7 @@ namespace ofxAsio {
     void start();
   protected:
     UdpReceiver();
-    virtual void on_receive(asio::error_code errorCode, std::size_t bytes_received);
+	void on_receive(asio::error_code errorCode, std::size_t bytes_received) {};
   };
   
 }

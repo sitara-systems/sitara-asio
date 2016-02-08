@@ -48,11 +48,3 @@ using namespace ofxAsio;
       return datagram;
     }
   }
-
-  void setOnReceive(std::function<void(std::shared_ptr<Datagram> msg)> response) {
-	  mOnReceiveFn = response;
-  };
-
-  void setOnSend(std::function<void(std::shared_ptr<Datagram> msg)> response) {
-	  mOnSendFn = response;
-  }
