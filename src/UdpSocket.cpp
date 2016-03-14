@@ -26,6 +26,7 @@ using namespace ofxAsio;
 
   void UdpSocket::init() {
 	  mIncomingDatagram = std::make_shared<Datagram>();
+	  mIncomingEndpoint = asio::ip::udp::endpoint(asio::ip::udp::v4(), 0);
 	  setIncomingBufferSize(1024);
 	  mServiceThread = std::thread([&] {
 		  mService.run();
@@ -33,7 +34,7 @@ using namespace ofxAsio;
   }
 
   void UdpSocket::setIncomingBufferSize(std::size_t buffer_size) {
-	  mIncomingDatagram->getMessage().resize(buffer_size);
+	  mIncomingMessage.resize(buffer_size);
   }
 
  void UdpSocket::send_datagram(std::shared_ptr<Datagram> datagram) {
@@ -53,16 +54,18 @@ using namespace ofxAsio;
   }
   
 void UdpSocket::receive() {
-	asio::mutable_buffers_1 buffer = asio::mutable_buffers_1((char*)mIncomingDatagram->getMessage().c_str(), mIncomingDatagram->getMessage().length());
-	mSocket.async_receive_from(buffer, mIncomingDatagram->getEndpoint().getAsioEndpoint(),
+	asio::mutable_buffers_1 buffer = asio::mutable_buffers_1((char*)mIncomingMessage.c_str(), mIncomingMessage.length());
+	mSocket.async_receive_from(buffer, mIncomingEndpoint,
 		[this](const asio::error_code &error, size_t bytes_received) {
+			mIncomingDatagram->setEndpoint(mIncomingEndpoint);
+			setIncomingBufferSize(bytes_received);
+			mIncomingDatagram->setMessage(mIncomingMessage);
 			onReceive(error, bytes_received);
 	});
   }
 
 void UdpSocket::onReceive(const asio::error_code &error, size_t bytes_received) {
 	if (!error && bytes_received > 0) {
-		onReceive(error, bytes_received);
 		for (auto callback : mOnReceiveFns) {
 			callback(mIncomingDatagram);
 		}

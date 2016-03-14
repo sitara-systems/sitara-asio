@@ -30,6 +30,8 @@ namespace ofxAsio {
 		asio::ip::udp::socket mSocket;
 		Endpoint mLocalEndpoint;
 		std::shared_ptr<Datagram> mIncomingDatagram;
+		asio::ip::udp::endpoint mIncomingEndpoint;
+		std::string mIncomingMessage;
 		std::vector<std::function<void(std::shared_ptr<Datagram> msg)> > mOnReceiveFns;
 		std::vector<std::function<void(std::shared_ptr<Datagram> msg)> > mOnSendFns;
 	};
