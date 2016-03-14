@@ -15,6 +15,7 @@ sender.send(datagram)
 namespace ofxAsio {
   class UdpSender : public UdpSocket {
   public:
+	UdpSender();
     UdpSender(int port);
     UdpSender(std::string localAddress, int port);
     ~UdpSender();

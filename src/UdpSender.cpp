@@ -2,6 +2,10 @@
 
 using namespace ofxAsio;
 
+UdpSender::UdpSender() : UdpSocket() {
+
+}
+
 UdpSender::UdpSender(int port) : UdpSocket(port) {
 
 }

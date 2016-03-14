@@ -21,8 +21,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7FD42DF7-442E-479A-BA76-D0022F99702A}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>example-udpReceiver</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <RootNamespace>example-udpSender</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -55,7 +54,6 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\libs\openFrameworksCompiled\project\vs\openFrameworksRelease.props" />
-    <Import Project="..\config\ofxAsio.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -98,7 +96,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofxAsio\libs;..\..\..\addons\ofxAsio\libs\asio-1.11.0;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\generic;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\generic\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\generic\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ip;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ip\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ip\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ip\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\local;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\local\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\local\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\posix;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ssl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ssl\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ssl\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ssl\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ts;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\windows;..\..\..\addons\ofxAsio\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -117,7 +115,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofxAsio\libs;..\..\..\addons\ofxAsio\libs\asio-1.11.0;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\generic;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\generic\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\generic\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ip;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ip\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ip\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ip\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\local;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\local\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\local\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\posix;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ssl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ssl\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ssl\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ssl\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ts;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\windows;..\..\..\addons\ofxAsio\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -136,7 +134,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofxAsio\libs;..\..\..\addons\ofxAsio\libs\asio-1.11.0;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\generic;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\generic\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\generic\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ip;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ip\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ip\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ip\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\local;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\local\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\local\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\posix;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ssl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ssl\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ssl\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ssl\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ts;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\windows;..\..\..\addons\ofxAsio\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
@@ -158,7 +156,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);..\..\..\addons\ofxAsio\libs;..\..\..\addons\ofxAsio\libs\asio-1.11.0;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\generic;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\generic\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\generic\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ip;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ip\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ip\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ip\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\local;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\local\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\local\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\posix;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ssl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ssl\detail;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ssl\detail\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ssl\impl;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\ts;..\..\..\addons\ofxAsio\libs\asio-1.11.0\include\asio\windows;..\..\..\addons\ofxAsio\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
@@ -176,18 +174,18 @@
   <ItemGroup>
     <ClCompile Include="..\src\UdpReceiver.cpp" />
     <ClCompile Include="..\src\UdpSender.cpp" />
-    <ClCompile Include="..\src\UdpSocket.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxAsio\src\UdpSocket.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\src\Datagram.h" />
-    <ClInclude Include="..\src\Endpoint.h" />
-    <ClInclude Include="..\src\ofxAsio.h" />
-    <ClInclude Include="..\src\UdpReceiver.h" />
-    <ClInclude Include="..\src\UdpSender.h" />
-    <ClInclude Include="..\src\UdpSocket.h" />
     <ClInclude Include="src\ofApp.h" />
+    <ClInclude Include="..\..\..\addons\ofxAsio\src\Datagram.h" />
+    <ClInclude Include="..\..\..\addons\ofxAsio\src\Endpoint.h" />
+    <ClInclude Include="..\..\..\addons\ofxAsio\src\ofxAsio.h" />
+    <ClInclude Include="..\..\..\addons\ofxAsio\src\UdpReceiver.h" />
+    <ClInclude Include="..\..\..\addons\ofxAsio\src\UdpSender.h" />
+    <ClInclude Include="..\..\..\addons\ofxAsio\src\UdpSocket.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
