@@ -3,16 +3,9 @@
 A wrapper to simplify using the ASIO library in openFrameworks.
 
 ## Requirements
-This addon unfortunately does *NOT* work with the project generator, due to ofxAsio being a header-only library and oddities with how the project generators adds libraries.
+To use this add-on, use the projector generator.  The one trick is that you'll then manually have to *remove* the `libs` folder from the project, so that your compiler doesn't try to compile the headers.  Once you've created a project, use the `asio.props` property sheet in `config/` to set up your compiler properly.
 
-You'll need to point your IDE to the ASIO library in the `libs/` folder.  There is a property sheet in the `config` folder that will do this for you in Visual Studio.  What this property sheet does is:
-
-* Add `ASIO_STANDLONE` to the PreProcessor definitions so ASIO compiles properly without boost.
-* Make sure `asio-1.10.6\include` and `$(OF_ROOT)\addons\ofxAsio\src` is added to your include paths.
-
-After doing this, you'll need to add all files in `ofxAsio\src` to your project to be compiled.
-
-This addon has been tested with openFrameworks v0.9.1
+This library has been tested with Visual Studio 2015 and openFrameworks v0.9.1
 
 ## Usage
 * `Endpoint` is the combination of an ip address and a port number.  This represents the destination for datagrams.
@@ -21,6 +14,8 @@ This addon has been tested with openFrameworks v0.9.1
 * `UdpReceiver` is a class for receiving UDP messages.
 
 ## Examples
+* 'example-udpSender` shows how to send messages repeatedly.
+* `example-udpReceiver` shows how to asynchronously wait for and print messages.
 
 ## Contributing
 This project uses the [Git Flow](http://nvie.com/posts/a-successful-git-branching-model/) paradigm.  Before contributing, please make your own feature branch with your changes.
