@@ -1,3 +1,5 @@
+#pragma once
+
 #include "asio.hpp"
 #include "UdpSocket.h"
 
