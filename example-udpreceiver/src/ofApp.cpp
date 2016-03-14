@@ -1,9 +1,14 @@
 #include "ofApp.h"
-#include "ofxAsio.h"
+
+using namespace ofxAsio;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	asio::io_service service;
+	mReceiver = std::make_shared<UdpReceiver>("0.0.0.0", 7331); // or UdpReceiver("192.168.0.17", 8080) to specify interface
+	mReceiver->addOnReceiveFn([](std::shared_ptr<Datagram> datagram) {
+		std::cout << "Received message " << datagram->getMessage() << " from " << datagram->getIpAddress() << ":" << datagram->getPort() << std::endl;
+	});
+	mReceiver->start();
 }
 
 //--------------------------------------------------------------

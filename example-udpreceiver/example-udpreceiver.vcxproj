@@ -177,6 +177,8 @@
     <ClCompile Include="..\src\UdpSocket.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="UdpReceiver.cpp" />
+    <ClCompile Include="UdpSender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\Datagram.h" />

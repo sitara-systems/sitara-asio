@@ -30,6 +30,14 @@ namespace ofxAsio {
       return mEndpoint;
     }
 
+	std::string getIpAddress() {
+		return mEndpoint.getIpAddress();
+	}
+
+	int getPort() {
+		return mEndpoint.getPort();
+	}
+
     void setMessage(std::string msg) {
       mMessage = msg;
     }

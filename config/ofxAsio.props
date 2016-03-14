@@ -8,7 +8,7 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalIncludeDirectories>$(OF_ROOT)\addons\ofxAsio\src;$(ASIO_ROOT)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions> _WIN32_WINNT=0x0602;ASIO_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions> ASIO_HAS_STD_ATOMIC;ASIO_HAS_STD_TYPE_TRAITS;_WIN32_WINNT=0x0602;ASIO_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>

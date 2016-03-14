@@ -10,6 +10,12 @@
     <ClCompile Include="..\src\UdpSocket.cpp">
       <Filter>addons\ofxAsio\src</Filter>
     </ClCompile>
+    <ClCompile Include="UdpReceiver.cpp">
+      <Filter>addons\ofxAsio\src</Filter>
+    </ClCompile>
+    <ClCompile Include="UdpSender.cpp">
+      <Filter>addons\ofxAsio\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">

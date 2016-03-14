@@ -23,8 +23,6 @@ namespace ofxAsio {
     ~UdpReceiver();
     void start();
   protected:
-    UdpReceiver();
-	void on_receive(asio::error_code errorCode, std::size_t bytes_received) {};
   };
   
 }

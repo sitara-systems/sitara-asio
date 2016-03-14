@@ -4,9 +4,9 @@
 #include "Endpoint.h"
 #include "Datagram.h"
 #include <memory>
+#include <thread>
 #include <array>
 #include <string>
-
 
 namespace ofxAsio {
 
@@ -16,19 +16,22 @@ namespace ofxAsio {
 		UdpSocket(int port);
 		UdpSocket(std::string localAddress, int port);
 		~UdpSocket();
-		bool send(std::shared_ptr<Datagram> msg);
-		std::shared_ptr<Datagram> receive(size_t bufferSize = 1024);
-		void setOnReceive(std::function<void(std::shared_ptr<Datagram> msg)> response) {};
-		void setOnSend(std::function<void(std::shared_ptr<Datagram> msg)> response) {};
+		void setIncomingBufferSize(std::size_t buffer_size);
+		void addOnReceiveFn(std::function<void(std::shared_ptr<Datagram> msg)> response);
+		void addOnSendFn(std::function<void(std::shared_ptr<Datagram> msg)> response);
 	protected:
-		//TO DO
+		void init();
+		void send_datagram(std::shared_ptr<Datagram> msg);
+		void receive();
+		void onReceive(const asio::error_code &error, std::size_t bytes_received);
 		asio::io_service mService;
+		std::thread mServiceThread;
+		asio::io_service::work mWork;
 		asio::ip::udp::socket mSocket;
 		Endpoint mLocalEndpoint;
-		//std::function<void(std::shared_ptr<Datagram> msg)> mOnReceiveFn;
-		//std::function<void(std::shared_ptr<Datagram> msg)> mOnSendFn;
-		virtual void on_receive(asio::error_code &ec, size_t bytes_received) {};
-		virtual void on_send(asio::error_code &ec, size_t bytes_transferred) {};
+		std::shared_ptr<Datagram> mIncomingDatagram;
+		std::vector<std::function<void(std::shared_ptr<Datagram> msg)> > mOnReceiveFns;
+		std::vector<std::function<void(std::shared_ptr<Datagram> msg)> > mOnSendFns;
 	};
   
 }
