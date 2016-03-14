@@ -5,14 +5,14 @@ using namespace ofxAsio;
 //--------------------------------------------------------------
 void ofApp::setup(){
 	mSender = std::make_shared<UdpSender>();
-	mSender->addOnSendFn([=] {
+	mSender->addOnSendFn([](std::shared_ptr<Datagram> datagram) {
 		std::printf("Sent message!");
 	});
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	std::shared_ptr<Datagram> datagram(new Datagram("Hello world", "192.168.0.27", 8080));
+	std::shared_ptr<Datagram> datagram = std::make_shared<Datagram>("Hello world", "192.168.0.115", 8080);
 	mSender->send(datagram);
 }
 

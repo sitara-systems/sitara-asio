@@ -2,7 +2,8 @@
 
 using namespace ofxAsio;
 
-  UdpSocket::UdpSocket() : mSocket(mService), mWork(mService), mLocalEndpoint(asio::ip::udp::endpoint(asio::ip::address_v4::any(), 0)) {
+  UdpSocket::UdpSocket() : mSocket(mService, asio::ip::udp::endpoint(asio::ip::address_v4::any(), 0)),
+	  mWork(mService), mLocalEndpoint(asio::ip::udp::endpoint(asio::ip::address_v4::any(), 0)) {
 	  init();
   }
 
