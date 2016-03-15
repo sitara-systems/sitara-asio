@@ -69,7 +69,7 @@ namespace ofxAsio {
 		}
 
 		asio::const_buffer getDataBuffer() {
-			return asio::buffer(mMessage.data(), mMessage.length());
+			return asio::buffer(mMessage.data(), mMessage.size());
 		}
 
 		std::size_t getDataLength() {
