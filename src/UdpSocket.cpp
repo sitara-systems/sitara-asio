@@ -39,7 +39,7 @@ using namespace ofxAsio;
   }
 
  void UdpSocket::send_datagram(std::shared_ptr<Datagram> datagram) {
-	mSocket.async_send_to(datagram->getDataBuffer(), datagram->getEndpoint().getAsioEndpoint(),
+	 mSocket.async_send_to(asio::buffer(datagram->getData(), datagram->getDataLength()), datagram->getEndpoint().getAsioEndpoint(),
 		[this, datagram](const asio::error_code& error, std::size_t bytes_transferred) {
 		if (!error) {
 			for (auto callback : mOnSendFns) {
@@ -77,7 +77,7 @@ void UdpSocket::onReceive(const asio::error_code &error, size_t bytes_received) 
 	receive();
 }
 
-void UdpSocket::addOnReceiveFn(std::function<void(std::shared_ptr<Datagram> msg)> response) {
+void UdpSocket::addOnReceiveFn(std::function<void(std::shared_ptr<Message> msg)> response) {
 	mOnReceiveFns.push_back(response);
 }
 

@@ -40,6 +40,7 @@ namespace ofxAsio {
 		}
 
 		virtual asio::const_buffer getDataBuffer() = 0;
+		virtual const char* getData() = 0;
 		virtual std::size_t getDataLength() = 0;
 
 	protected:
@@ -70,6 +71,10 @@ namespace ofxAsio {
 
 		asio::const_buffer getDataBuffer() {
 			return asio::buffer(mMessage.data(), mMessage.size());
+		}
+
+		const char* getData() {
+			return mMessage.data();
 		}
 
 		std::size_t getDataLength() {
@@ -104,6 +109,10 @@ namespace ofxAsio {
 
 		asio::const_buffer getDataBuffer() {
 			return asio::buffer(mPacket.data(), mPacket.size());
+		}
+
+		const char* getData() {
+			return reinterpret_cast<char*>(mPacket.data());
 		}
 
 		std::size_t getDataLength() {
