@@ -9,14 +9,33 @@ namespace ofxAsio {
 	public:
 		Datagram() {
 			mEndpoint = Endpoint();
+			init();
 		}
 
 		Datagram(Endpoint endpoint) {
 			mEndpoint = endpoint;
+			init();
 		}
 
 		Datagram(std::string ipAddress, int port) {
 			mEndpoint = Endpoint(ipAddress, port);
+			init();
+		}
+
+		Datagram(std::string message, std::string ipAddress, int port) {
+			mEndpoint = Endpoint(ipAddress, port);
+			setData(message);
+		}
+
+		Datagram(std::vector<unsigned char> data, std::string ipAddress, int port) {
+			mEndpoint = Endpoint(ipAddress, port);
+			setData(data);
+		}
+
+		void init() {
+			mData.reserve(512);
+			mData.clear();
+			mDataLength = 0;
 		}
 
 		Endpoint getEndpoint() {
@@ -39,88 +58,43 @@ namespace ofxAsio {
 			mEndpoint = Endpoint(ipAddress, port);
 		}
 
-		virtual asio::const_buffer getDataBuffer() = 0;
-		virtual const char* getData() = 0;
-		virtual std::size_t getDataLength() = 0;
+		void setData(std::string message) {
+			mData.resize(message.size());
+			std::copy(message.begin(), message.end(), mData.data());
+			mData.push_back('\0');
+			mDataLength = message.size();
+		}
+
+		void setData(std::vector<unsigned char> data) {
+			mData.resize(data.size());
+			std::copy(data.begin(), data.end(), mData.begin());
+			mDataLength = data.size();
+		}
+
+		asio::const_buffer getDataBuffer() {
+			return asio::buffer(mData, mDataLength);
+		}
+
+		const char* getData() {
+			return mData.data();
+		}
+
+		std::string getDataAsString() {
+			std::string msg = std::string(mData.data(), mDataLength);
+			return msg;
+		}
+
+		std::vector<unsigned char> getDataAsVector() {
+			return std::vector<unsigned char>(reinterpret_cast<unsigned char>(mData.data()), mDataLength);
+		}
+
+		std::size_t getDataLength() {
+			return mDataLength;
+		}
 
 	protected:
 		Endpoint mEndpoint;
+		std::vector<char> mData;
+		std::size_t mDataLength;
 	};
-
-	class Message : public Datagram {
-	public:
-		Message() : Datagram() {
-			mMessage = "";
-		}
-
-		Message(std::string msg, Endpoint endpoint) : Datagram(endpoint) {
-			mMessage = msg;
-		}
-
-		Message(std::string msg, std::string ipAddress, int port) : Datagram(ipAddress, port) {
-			mMessage = msg;
-		}
-
-		void setMessage(std::string msg) {
-			mMessage = msg;
-		}
-
-		std::string getMessage() {
-			return mMessage;
-		}
-
-		asio::const_buffer getDataBuffer() {
-			return asio::buffer(mMessage.data(), mMessage.size());
-		}
-
-		const char* getData() {
-			return mMessage.data();
-		}
-
-		std::size_t getDataLength() {
-			return mMessage.length();
-		}
-
-	protected:
-		std::string mMessage;
-	};
-
-	class Packet : public Datagram {
-	public:
-		Packet() : Datagram() {
-			mPacket.clear();
-		}
-
-		Packet(std::vector<unsigned char> data, Endpoint endpoint) : Datagram(endpoint) {
-			mPacket = data;
-		}
-
-		Packet(std::vector<unsigned char> data, std::string ipAddress, int port) : Datagram(ipAddress, port) {
-			mPacket = data;
-		}
-
-		void setPacket(std::vector<unsigned char> data) {
-			mPacket = data;
-		}
-
-		std::vector<unsigned char> getPacket() {
-			return mPacket;
-		}
-
-		asio::const_buffer getDataBuffer() {
-			return asio::buffer(mPacket.data(), mPacket.size());
-		}
-
-		const char* getData() {
-			return reinterpret_cast<char*>(mPacket.data());
-		}
-
-		std::size_t getDataLength() {
-			return mPacket.size();
-		}
-
-	protected:
-		std::vector<unsigned char> mPacket;
-	};
-
 }
