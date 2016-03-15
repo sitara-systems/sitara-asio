@@ -21,6 +21,7 @@ namespace ofxAsio {
     ~UdpSender();
 	void send(std::shared_ptr<Datagram> datagram);
 	void send_to(std::string ip_address, int port, std::string message);
+	void send_to(std::string ip_address, int port, std::vector<unsigned char> data);
   protected:
 	  void on_send(asio::error_code errorCode, std::size_t bytes_transferred) {};
   };

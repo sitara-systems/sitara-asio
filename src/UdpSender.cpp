@@ -23,8 +23,15 @@ void UdpSender::send(std::shared_ptr<Datagram> datagram) {
 }
 
 void UdpSender::send_to(std::string ip_address, int port, std::string message) {
-	std::shared_ptr<Datagram> outgoingDatagram = std::make_shared<Datagram>();
+	std::shared_ptr<Message> outgoingDatagram = std::make_shared<Message>();
 	outgoingDatagram->setEndpoint(ip_address, port);
 	outgoingDatagram->setMessage(message);
+	send(outgoingDatagram);
+}
+
+void UdpSender::send_to(std::string ip_address, int port, std::vector<unsigned char> data) {
+	std::shared_ptr<Packet> outgoingDatagram = std::make_shared<Packet>();
+	outgoingDatagram->setEndpoint(ip_address, port);
+	outgoingDatagram->setPacket(data);
 	send(outgoingDatagram);
 }
