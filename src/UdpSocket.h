@@ -17,7 +17,7 @@ namespace ofxAsio {
 		UdpSocket(std::string localAddress, int port);
 		~UdpSocket();
 		void setIncomingBufferSize(std::size_t buffer_size);
-		void addOnReceiveFn(std::function<void(std::shared_ptr<Datagram> msg)> response);
+		void addOnReceiveFn(std::function<void(std::shared_ptr<Message> msg)> response);
 		void addOnSendFn(std::function<void(std::shared_ptr<Datagram> msg)> response);
 	protected:
 		void init();
@@ -29,10 +29,10 @@ namespace ofxAsio {
 		asio::io_service::work mWork;
 		asio::ip::udp::socket mSocket;
 		Endpoint mLocalEndpoint;
-		std::shared_ptr<Datagram> mIncomingDatagram;
+		std::shared_ptr<Message> mIncomingDatagram;
 		asio::ip::udp::endpoint mIncomingEndpoint;
 		std::string mIncomingMessage;
-		std::vector<std::function<void(std::shared_ptr<Datagram> msg)> > mOnReceiveFns;
+		std::vector<std::function<void(std::shared_ptr<Message> msg)> > mOnReceiveFns;
 		std::vector<std::function<void(std::shared_ptr<Datagram> msg)> > mOnSendFns;
 	};
   

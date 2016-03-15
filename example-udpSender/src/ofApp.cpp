@@ -12,7 +12,7 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	std::shared_ptr<Datagram> datagram = std::make_shared<Datagram>("Hello world", "192.168.0.115", 8080);
+	std::shared_ptr<Message> datagram = std::make_shared<Message>("Hello world", "192.168.0.115", 8080);
 	mSender->send(datagram);
 }
 
