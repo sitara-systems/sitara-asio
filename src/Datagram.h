@@ -58,6 +58,11 @@ namespace ofxAsio {
 			mEndpoint = Endpoint(ipAddress, port);
 		}
 
+		void setData(char* data, std::size_t length) {
+			mData = std::vector<char>(data, data + length);
+			mDataLength = length;
+		}
+
 		void setData(std::string message) {
 			mData.resize(message.size());
 			std::copy(message.begin(), message.end(), mData.data());

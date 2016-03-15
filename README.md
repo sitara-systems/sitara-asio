@@ -9,11 +9,11 @@ This library has been tested with Visual Studio 2015 and openFrameworks v0.9.1
 
 ## Usage
 * `Endpoint` is the combination of an ip address and a port number.  This represents the destination for datagrams.
-* `Datagram` is a class that contains a message and a destination endpoint.  There are two types:
-** `Message` contains a `std::string` data type, for sending simple udp strings.
-** `Packet` contains a `std::vector<unsigned char>` data type, for sending byte streams over UDP (typically to hardware devices).
+* `Datagram` is a class that contains a message and a destination endpoint.  You can set the message using a `char*`, `std::string`, or a `std::vector<unsigned char>`.
 * `UdpSender` is a class for sending UDP messages.
 * `UdpReceiver` is a class for receiving UDP messages.
+
+Both `UdpSender` and `UdpReceiver` send and receive asynchronously, so the preferred way to deal with the results is to use callbacks.  With both classes you can attach a function callback that accepts a `std::shared_ptr<Datagram>` via the functions `addOnReceiveFn` and `addOnSendFn`.  If you're not sure what I'm talking about, check out the examples.
 
 ## Examples
 * 'example-udpSender` shows how to send messages repeatedly.
