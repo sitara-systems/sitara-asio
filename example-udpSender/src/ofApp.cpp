@@ -6,14 +6,16 @@ using namespace ofxAsio;
 void ofApp::setup(){
 	mSender = std::make_shared<UdpSender>();
 	mSender->addOnSendFn([](std::shared_ptr<Datagram> datagram) {
-		std::printf("Sent message!");
+		std::printf("Sent message '%s' to %s:%d!\n", datagram->getDataAsString().c_str(), datagram->getIpAddress().c_str(), datagram->getPort());
 	});
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	std::shared_ptr<Message> datagram = std::make_shared<Message>("Hello world", "192.168.0.115", 8080);
-	mSender->send(datagram);
+	if (ofGetFrameNum() % 60 == 0) {
+		std::shared_ptr<Datagram> datagram = std::make_shared<Datagram>("Hello world", "192.168.0.115", 8080);
+		mSender->send(datagram);
+	}
 }
 
 //--------------------------------------------------------------

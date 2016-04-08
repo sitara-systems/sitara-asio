@@ -35,7 +35,6 @@ namespace ofxAsio {
 		void init() {
 			mData.reserve(512);
 			mData.clear();
-			mDataLength = 0;
 		}
 
 		Endpoint getEndpoint() {
@@ -60,24 +59,21 @@ namespace ofxAsio {
 
 		void setData(char* data, std::size_t length) {
 			mData = std::vector<char>(data, data + length);
-			mDataLength = length;
 		}
 
 		void setData(std::string message) {
 			mData.resize(message.size());
 			std::copy(message.begin(), message.end(), mData.data());
 			mData.push_back('\0');
-			mDataLength = message.size();
 		}
 
 		void setData(std::vector<unsigned char> data) {
 			mData.resize(data.size());
 			std::copy(data.begin(), data.end(), mData.begin());
-			mDataLength = data.size();
 		}
 
 		asio::const_buffer getDataBuffer() {
-			return asio::buffer(mData, mDataLength);
+			return asio::buffer(mData, mData.size());
 		}
 
 		const char* getData() {
@@ -85,21 +81,44 @@ namespace ofxAsio {
 		}
 
 		std::string getDataAsString() {
-			std::string msg = std::string(mData.data(), mDataLength);
+			std::string msg = std::string(mData.data(), mData.size());
 			return msg;
 		}
 
 		std::vector<unsigned char> getDataAsVector() {
-			return std::vector<unsigned char>(reinterpret_cast<unsigned char>(mData.data()), mDataLength);
+			return std::vector<unsigned char>(reinterpret_cast<unsigned char>(mData.data()), mData.size());
 		}
 
 		std::size_t getDataLength() {
-			return mDataLength;
+			return mData.size();
+		}
+
+		void clear() {
+			mData.clear();
+		}
+
+		bool empty() {
+			return mData.empty();
+		}
+
+		void push_back(char data) {
+			mData.push_back(data);
+		}
+
+		void push_back(unsigned char data) {
+			mData.push_back(data);
+		}
+
+		std::vector<char>::iterator begin() {
+			return mData.begin();
+		}
+
+		std::vector<char>::iterator end() {
+			return mData.end();
 		}
 
 	protected:
 		Endpoint mEndpoint;
 		std::vector<char> mData;
-		std::size_t mDataLength;
 	};
 }
