@@ -17,20 +17,16 @@ This project is currently not configured for Xcode in OSX.  If anyone wants to t
 
 Both should be created as such:
 
-     ```
      std::shared_ptr<ofxAsio::UdpSender> mUdpSender = std::make_shared<ofxAsio::UdpSender>();
      std::shared_ptr<ofxAsio::UdpReceiver> mUdpReceiver = std::make_shared<ofxAsio::UdpReceiver>("0.0.0.0", 8080);
-     ```
      
 For both classes, you'll need to familiarize yourself with the `Datagram` class.  A datagram is the combination of a udp message and an endpoint; in `ofxAsio` we've encapsulated the endpoint as an `Endpoint` class that contains an IP address and a port number.  The message itself lives in the `Datagram` class, represented as a `std::vector`.
 
 The `Datagram` class is meant to be versatile to meet most possible needs, which means that it should be able to accept strings as the message, but it should also be able to accept data packets (which would typically be buffers of `unsigned char`, or bytes).  As such, `Datagram` has several ways to set the message:
 
-    ```
     void setData(char* data, std::size_t length);
     void setData(std::string message);
     void setData(std::vector<unsigned char> data);
-    ```
 
 All three accepted data types (`char*`, `std::vector<unsigned char>`, and `std::string`) are also accepted in the constructor.
 
