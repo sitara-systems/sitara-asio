@@ -5,7 +5,7 @@ A wrapper to simplify using the Asio library for asynchronous networking in open
 ## Requirements
 
 ### Windows
-To use this add-on, use the projector generator.  The one trick is that you'll then manually have to *remove* the `libs` folder from the project, so that your compiler doesn't try to compile the headers.  Once you've created a project, use the `asio.props` property sheet in `config/` to set up your compiler properly.
+To use this add-on, use the projector generator.  The one trick is that you'll then manually have to *remove* the `libs` folder from the project, so that your compiler doesn't try to compile the headers.  Once you've created a project, use the `ofxAsio.props` property sheet in `config/` to set up your compiler properly.
 
 This library has been tested with Visual Studio 2015 and openFrameworks v0.9.1
 

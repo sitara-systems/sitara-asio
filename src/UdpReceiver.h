@@ -18,11 +18,13 @@ namespace ofxAsio {
 
   class UdpReceiver : public UdpSocket {
   public:
-    UdpReceiver(int port);
-    UdpReceiver(std::string localAddress, int port);
+    static std::shared_ptr<UdpReceiver> make(int port);
+    static std::shared_ptr<UdpReceiver> make(std::string localAddress, int port);
     ~UdpReceiver();
     void start();
   protected:
+	  UdpReceiver(int port);
+	  UdpReceiver(std::string localAddress, int port);
   };
   
 }

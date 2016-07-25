@@ -4,7 +4,7 @@ using namespace ofxAsio;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	mSender = std::make_shared<UdpSender>();
+	mSender = UdpSender::make();
 	mSender->addOnSendFn([](std::shared_ptr<Datagram> datagram) {
 		std::printf("Sent message '%s' to %s:%d!\n", datagram->getDataAsString().c_str(), datagram->getIpAddress().c_str(), datagram->getPort());
 	});

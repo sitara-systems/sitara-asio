@@ -4,7 +4,7 @@ using namespace ofxAsio;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-	mReceiver = std::make_shared<UdpReceiver>("0.0.0.0", 7331); // or UdpReceiver("192.168.0.17", 8080) to specify interface
+	mReceiver = UdpReceiver::make("0.0.0.0", 7331); // or UdpReceiver("192.168.0.17", 8080) to specify interface
 	mReceiver->addOnReceiveFn([](std::shared_ptr<Datagram> datagram) {
 		std::printf("ofxAsio callback -- received %d bytes from %s:%d\n", datagram->getDataLength(), datagram->getIpAddress().c_str(), datagram->getPort());
 	});
