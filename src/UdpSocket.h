@@ -21,7 +21,7 @@ namespace ofxAsio {
 		void addOnSendFn(std::function<void(std::shared_ptr<Datagram> msg)> response);
 	protected:
 		void init();
-		void send_datagram(std::shared_ptr<Datagram> msg);
+		void sendDatagram(std::shared_ptr<Datagram> msg);
 		void receive();
 		void onReceive(const asio::error_code &error, std::size_t bytes_received);
 		asio::io_service mService;

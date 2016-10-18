@@ -38,7 +38,7 @@ using namespace ofxAsio;
 	  mIncomingMessage.resize(buffer_size);
   }
 
- void UdpSocket::send_datagram(std::shared_ptr<Datagram> datagram) {
+ void UdpSocket::sendDatagram(std::shared_ptr<Datagram> datagram) {
 	 std::shared_ptr<Datagram> outgoingDatagram = std::make_shared<Datagram>(datagram->getEndpoint());
 	 outgoingDatagram->setData(datagram->getDataAsString());
 
