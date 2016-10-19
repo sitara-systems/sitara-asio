@@ -33,7 +33,7 @@ void TcpServer::start() {
 	createSession();
 }
 
-void TcpServer::onConnect(std::shared_ptr<Session> session, const asio::error_code& error) {
+void TcpServer::onConnect(std::shared_ptr<TcpSession> session, const asio::error_code& error) {
 	if (!error) {
 		session->start();
 		createSession();
@@ -42,6 +42,15 @@ void TcpServer::onConnect(std::shared_ptr<Session> session, const asio::error_co
 
 
 void TcpServer::init(std::string localAddress, int port) {
+		if (localAddress == "") {
+		mLocalEndpoint = asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port);
+	}
+	else {
+		mLocalEndpoint = asio::ip::tcp::endpoint(asio::ip::address::from_string(localAddress), port);
+	}
+
+	std::printf("ofxAsio::TcpServer -- Creating endpoint %s:%d ...\n", mLocalEndpoint.address().to_string().c_str(), mLocalEndpoint.port());
+
 	mAcceptor = std::shared_ptr<asio::ip::tcp::acceptor>(new asio::ip::tcp::acceptor(mService, mLocalEndpoint));
 
 	mServiceThread = std::thread([&] {
@@ -51,7 +60,7 @@ void TcpServer::init(std::string localAddress, int port) {
 }
 
 void TcpServer::createSession() {
-	std::shared_ptr<Session> session = Session::make(mService);
+	std::shared_ptr<TcpSession> session = TcpSession::make(mService);
 	asio::error_code error;
 
 	mAcceptor->async_accept(mSocket, 

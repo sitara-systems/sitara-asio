@@ -2,7 +2,7 @@
 
 #include <thread>
 #include "asio/asio.hpp"
-#include "Session.h"
+#include "TcpSession.h"
 
 namespace ofxAsio {
   class TcpServer {
@@ -16,7 +16,7 @@ namespace ofxAsio {
 	  TcpServer(std::string localAddress, int port);
 	  void init(std::string localAddress, int port);
 	  void createSession();
-	  void onConnect(std::shared_ptr<Session> session, const asio::error_code& error);
+	  void onConnect(std::shared_ptr<TcpSession> session, const asio::error_code& error);
 	  asio::io_service mService;
 	  std::thread mServiceThread;
 	  asio::ip::tcp::socket mSocket;

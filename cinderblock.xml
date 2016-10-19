@@ -16,6 +16,6 @@
   <headerPattern>src/*.h</headerPattern>
   <!--   <includePath>libs/asio-1.11.0/include/</includePath> -->
   <includePath>src/</includePath>
-  <preprocessorDefine>ASIO_HAS_STD_ATOMIC;ASIO_HAS_STD_TYPE_TRAITS;_WIN32_WINNT=0x0602;ASIO_STANDALONE;</preprocessorDefine>
+  <preprocessorDefine>ASIO_HAS_STD_CHRONO;ASIO_HAS_STD_ATOMIC;ASIO_HAS_STD_TYPE_TRAITS;_WIN32_WINNT=0x0602;ASIO_STANDALONE;</preprocessorDefine>
 </block>
 </cinder>
