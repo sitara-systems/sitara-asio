@@ -8,8 +8,9 @@ std::shared_ptr<TcpSession> TcpSession::make(asio::io_service& service) {
 }
 
 TcpSession::TcpSession(asio::io_service& service) : mSocket(service) {
-	mIncomingDatagram = std::shared_ptr<Datagram>(new Datagram());
+	mTerminator = '\0';
 	mIsConnected = false;
+	setIncomingBufferSize(1024);
 }
 
 
@@ -27,48 +28,54 @@ asio::ip::tcp::socket& TcpSession::getSocket() {
 	return mSocket;
 }
 
-std::shared_ptr<Datagram> TcpSession::getDatagram() {
-	return mIncomingDatagram;
+char TcpSession::getTerminator() {
+	return mTerminator;
+}
+
+void TcpSession::setTerminator(char terminator) {
+	mTerminator = terminator;
 }
 
 void TcpSession::onWrite(const asio::error_code& error, std::size_t bytesReceived) {
 	if (!error && mIsConnected) {
-		std::printf("Sent message\n");
-	}
-	else {
-		std::printf("We had an error: %s\n", error.message().c_str());
-	}
-}
-
-void TcpSession::onRead(const asio::error_code& error, std::size_t bytesReceived) {
-	if (bytesReceived) {
-		std::printf("ofxAsio::TcpSession::onReceive -- received %d bytes", bytesReceived);
-	}
-
-	if (bytesReceived && mIncomingMessage[bytesReceived - 1] == '\0') {
-		std::printf("ofxAsio::TcpSession::onReceive -- received message %s", mIncomingDatagram->getDataAsString().c_str());
-		--bytesReceived;
-		mIsConnected = false;
-	}
-
-	if (!error && mIsConnected) {
 		receive();
 	}
 	else {
+		std::printf("ofxAsio::TcpSession::onWrite -- Error writing data. %s\n", error.message().c_str());;
+	}
+}
+
+void TcpSession::onReceive(const asio::error_code& error, std::size_t bytesReceived) {
+	if (bytesReceived) {
+		std::printf("ofxAsio::TcpSession::onReceive -- received message %s in %d bytes\n", mIncomingMessage.c_str(), bytesReceived);
+		if (mIncomingMessage[bytesReceived - 1] == mTerminator) {
+			std::printf("ofxAsio::TcpSession::onReceive -- received terminator charactder %s\n", mTerminator);
+			--bytesReceived;
+			setIncomingBufferSize(bytesReceived);
+			mIsConnected = false;
+		}
+	}
+
+	if (!error && mIsConnected) {
+		asio::async_write(mSocket, asio::buffer(mIncomingMessage.c_str(), mIncomingMessage.size()),
+			[this](const asio::error_code &error, std::size_t bytes_received) {
+				onWrite(error, bytes_received);
+		});
+	}
+	else {
 		std::printf("ofxAsio::TcpSession::onReceive -- Error receiving data. %s\n", error.message().c_str());;
-		delete this;
 	}
 }
 
 void TcpSession::receive() {
-	std::printf("ofxAsio::TcpSession::onReceive -- receive()");
-	mSocket.async_read_some(asio::mutable_buffers_1((char*)mIncomingMessage.c_str(), mIncomingMessage.size()),
-		[this](const asio::error_code &error, std::size_t bytes_received) {
-		if (bytes_received) {
-			setIncomingBufferSize(bytes_received);
-			mIncomingDatagram->setData(mIncomingMessage);
+	asio::mutable_buffers_1 buffer = asio::mutable_buffers_1((char*)mIncomingMessage.c_str(), mIncomingMessage.size());
+
+	mSocket.async_read_some(buffer,
+		[this](const asio::error_code &error, std::size_t bytesReceived) {
+		if (bytesReceived) {
+			setIncomingBufferSize(bytesReceived);
 		}
-		onRead(error, bytes_received);
+		onReceive(error, bytesReceived);
 	});
 
 }

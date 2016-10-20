@@ -22,7 +22,6 @@ namespace ofxAsio {
 	  asio::ip::tcp::acceptor mAcceptor;
 	  asio::ip::tcp::socket mSocket;
 	  asio::ip::tcp::endpoint mLocalEndpoint;
-	  std::string mIncomingMessage;
 	  std::vector < std::shared_ptr<TcpSession>> mSessions;
   };
   
