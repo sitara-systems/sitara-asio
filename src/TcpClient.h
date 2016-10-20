@@ -30,6 +30,7 @@ namespace ofxAsio {
 		bool mIsConnected;
 		asio::streambuf input_buffer_;
 		asio::io_service mService;
+        asio::io_service::work mWork;
 		std::thread mServiceThread;
 		asio::ip::tcp::socket mSocket;
 		std::shared_ptr<asio::ip::tcp::resolver> mResolver;

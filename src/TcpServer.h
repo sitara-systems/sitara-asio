@@ -20,6 +20,7 @@ namespace ofxAsio {
 	  void onWrite(std::vector<std::shared_ptr<TcpSession>>::iterator session_iter, const asio::error_code& error, std::size_t bytesReceived);
 	  void onRead(std::vector<std::shared_ptr<TcpSession>>::iterator session_iter, const asio::error_code& error, std::size_t bytesReceived);
 	  asio::io_service mService;
+      asio::io_service::work mWork;
 	  std::thread mServiceThread;
 	  asio::ip::tcp::acceptor mAcceptor;
 	  asio::ip::tcp::socket mSocket;

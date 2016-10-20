@@ -7,7 +7,7 @@ std::shared_ptr<TcpClient> TcpClient::make() {
 	return Server;
 }
 
-TcpClient::TcpClient() : mSocket(mService), mTimer(mService), mHeartbeatTimer(mService), mIsConnected(true) {
+TcpClient::TcpClient() : mService(), mSocket(mService), mWork(mService), mTimer(mService), mHeartbeatTimer(mService), mIsConnected(true) {
 	init();
 }
 

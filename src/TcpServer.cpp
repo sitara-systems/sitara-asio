@@ -7,16 +7,16 @@ std::shared_ptr<TcpServer> TcpServer::make(int port) {
 	return Server;
 }
 
-TcpServer::TcpServer(int port) : mService(), mSocket(mService), mAcceptor(mService) {
+TcpServer::TcpServer(int port) : mService(), mSocket(mService), mWork(mService), mAcceptor(mService) {
 	init(port);
 }
 
 TcpServer::~TcpServer() {
 	mSocket.cancel();
 	mService.stop();
-//	if (mServiceThread.joinable()) {
-//		mServiceThread.join();
-//	}
+	if (mServiceThread.joinable()) {
+		mServiceThread.join();
+	}
 }
 
 void TcpServer::start() {
@@ -54,7 +54,7 @@ void TcpServer::onWrite(std::vector<std::shared_ptr<TcpSession>>::iterator sessi
 		}
 	}
 	else {
-		std::printf("We had an error: %s\n", error.message());
+		std::printf("We had an error: %s\n", error.message().c_str());
 		mSessions.erase(session_iter);
 	}
 }
