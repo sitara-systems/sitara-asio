@@ -20,7 +20,6 @@ TcpClient::~TcpClient() {
 }
 
 void TcpClient::connect(std::string ip_address, int port) {
-	//std::printf("ofxAsio::TcpClient -- listening for messages at %s:%d\n", mLocalEndpoint.getIpAddress().c_str(), mLocalEndpoint.getPort());
 	// Start the connect actor.
 	mResolver = std::shared_ptr<asio::ip::tcp::resolver>(new asio::ip::tcp::resolver(mService));
 	start_connect(mResolver->resolve(asio::ip::tcp::resolver::query(ip_address, std::to_string(port))));
@@ -111,7 +110,7 @@ void TcpClient::handle_connect(const asio::error_code& ec,
 
 	// Check if the connect operation failed before the deadline expired.
 	else if (ec) {
-		std::printf("ofxAsio::TcpClient -- Connect error: %s\n", ec.message());
+		std::printf("ofxAsio::TcpClient -- Connect error: %s\n", ec.message().c_str());
 
 		// We need to close the socket used in the previous connection attempt
 		// before starting a new one.
@@ -166,7 +165,7 @@ void TcpClient::handle_read(const asio::error_code& ec, size_t bytes_received)
 	}
 	else
 	{
-		std::printf("Error on receive: %s\n", ec.message());
+		std::printf("Error on receive: %s\n", ec.message().c_str());
 
 		disconnect();
 	}
@@ -195,7 +194,7 @@ void TcpClient::handle_write(const asio::error_code& ec, size_t bytes_received)
 	}
 	else
 	{
-		std::printf("Error on heartbeat: %s\n", ec.message());
+		std::printf("Error on heartbeat: %s\n", ec.message().c_str());
 
 		disconnect();
 	}
