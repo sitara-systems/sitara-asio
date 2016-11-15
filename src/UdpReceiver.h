@@ -1,6 +1,6 @@
 #pragma once
 
-#include "asio.hpp"
+#include "asio/asio.hpp"
 #include "UdpSocket.h"
 
 /*
@@ -14,18 +14,19 @@ receiver.start();
 
  */
 
-namespace ofxAsio {
+namespace midnight {
+	namespace ofxAsio {
 
-  class UdpReceiver : public UdpSocket {
-  public:
-    static std::shared_ptr<UdpReceiver> make(int port);
-    static std::shared_ptr<UdpReceiver> make(std::string localAddress, int port);
-    ~UdpReceiver();
-    void start();
-  protected:
-	  UdpReceiver(int port);
-	  UdpReceiver(std::string localAddress, int port);
-  };
-  
+		class UdpReceiver : public UdpSocket {
+		public:
+			static std::shared_ptr<UdpReceiver> make(int port);
+			static std::shared_ptr<UdpReceiver> make(std::string localAddress, int port);
+			~UdpReceiver();
+			void start();
+		protected:
+			UdpReceiver(int port);
+			UdpReceiver(std::string localAddress, int port);
+		};
+
+	}
 }
-

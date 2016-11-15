@@ -1,6 +1,6 @@
 #include "UdpSocket.h"
 
-using namespace ofxAsio;
+using namespace midnight::ofxAsio;
 
   UdpSocket::UdpSocket() : mSocket(mService, asio::ip::udp::endpoint(asio::ip::address_v4::any(), 0)),
 	  mWork(mService), mLocalEndpoint(asio::ip::udp::endpoint(asio::ip::address_v4::any(), 0)) {
@@ -38,7 +38,7 @@ using namespace ofxAsio;
 	  mIncomingMessage.resize(buffer_size);
   }
 
- void UdpSocket::send_datagram(std::shared_ptr<Datagram> datagram) {
+ void UdpSocket::sendDatagram(std::shared_ptr<Datagram> datagram) {
 	 std::shared_ptr<Datagram> outgoingDatagram = std::make_shared<Datagram>(datagram->getEndpoint());
 	 outgoingDatagram->setData(datagram->getDataAsString());
 

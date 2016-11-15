@@ -1,6 +1,6 @@
 #include "UdpSender.h"
 
-using namespace ofxAsio;
+using namespace midnight::ofxAsio;
 
 std::shared_ptr<UdpSender> UdpSender::make() {
 	std::shared_ptr<UdpSender> sender(new UdpSender());
@@ -34,7 +34,7 @@ UdpSender::~UdpSender() {
 }
 
 void UdpSender::send(std::shared_ptr<Datagram> datagram) {
-	send_datagram(datagram);
+	sendDatagram(datagram);
 }
 
 void UdpSender::send_to(std::string ip_address, int port, std::string message) {

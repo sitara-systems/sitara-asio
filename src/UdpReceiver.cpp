@@ -1,6 +1,6 @@
 #include "UdpReceiver.h"
 
-using namespace ofxAsio;
+using namespace midnight::ofxAsio;
 
 std::shared_ptr<UdpReceiver> UdpReceiver::make(int port) {
 	std::shared_ptr<UdpReceiver> receiver(new UdpReceiver(port));

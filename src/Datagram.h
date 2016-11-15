@@ -1,124 +1,127 @@
 #pragma once
 
-#include "asio.hpp"
+#include "asio/asio.hpp"
 #include "Endpoint.h"
 #include <string>
 
-namespace ofxAsio {
-	class Datagram {
-	public:
-		Datagram() {
-			mEndpoint = Endpoint();
-			init();
-		}
+namespace midnight {
 
-		Datagram(Endpoint endpoint) {
-			mEndpoint = endpoint;
-			init();
-		}
+	namespace ofxAsio {
+		class Datagram {
+		public:
+			Datagram() {
+				mEndpoint = Endpoint();
+				init();
+			}
 
-		Datagram(std::string ipAddress, int port) {
-			mEndpoint = Endpoint(ipAddress, port);
-			init();
-		}
+			Datagram(Endpoint endpoint) {
+				mEndpoint = endpoint;
+				init();
+			}
 
-		Datagram(std::string message, std::string ipAddress, int port) {
-			mEndpoint = Endpoint(ipAddress, port);
-			setData(message);
-		}
+			Datagram(std::string ipAddress, int port) {
+				mEndpoint = Endpoint(ipAddress, port);
+				init();
+			}
 
-		Datagram(std::vector<unsigned char> data, std::string ipAddress, int port) {
-			mEndpoint = Endpoint(ipAddress, port);
-			setData(data);
-		}
+			Datagram(std::string message, std::string ipAddress, int port) {
+				mEndpoint = Endpoint(ipAddress, port);
+				setData(message);
+			}
 
-		void init() {
-			mData.reserve(512);
-			mData.clear();
-		}
+			Datagram(std::vector<unsigned char> data, std::string ipAddress, int port) {
+				mEndpoint = Endpoint(ipAddress, port);
+				setData(data);
+			}
 
-		Endpoint getEndpoint() {
-			return mEndpoint;
-		}
+			void init() {
+				mData.reserve(512);
+				mData.clear();
+			}
 
-		std::string getIpAddress() {
-			return mEndpoint.getIpAddress();
-		}
+			Endpoint getEndpoint() {
+				return mEndpoint;
+			}
 
-		int getPort() {
-			return mEndpoint.getPort();
-		}
+			std::string getIpAddress() {
+				return mEndpoint.getIpAddress();
+			}
 
-		void setEndpoint(Endpoint endpoint) {
-			mEndpoint = endpoint;
-		}
+			int getPort() {
+				return mEndpoint.getPort();
+			}
 
-		void setEndpoint(std::string ipAddress, int port) {
-			mEndpoint = Endpoint(ipAddress, port);
-		}
+			void setEndpoint(Endpoint endpoint) {
+				mEndpoint = endpoint;
+			}
 
-		void setData(char* data, std::size_t length) {
-			mData = std::vector<char>(data, data + length);
-		}
+			void setEndpoint(std::string ipAddress, int port) {
+				mEndpoint = Endpoint(ipAddress, port);
+			}
 
-		void setData(std::string message) {
-			mData.resize(message.size());
-			std::copy(message.begin(), message.end(), mData.data());
-			mData.push_back('\0');
-		}
+			void setData(char* data, std::size_t length) {
+				mData = std::vector<char>(data, data + length);
+			}
 
-		void setData(std::vector<unsigned char> data) {
-			mData.resize(data.size());
-			std::copy(data.begin(), data.end(), mData.begin());
-		}
+			void setData(std::string message) {
+				mData.resize(message.size());
+				std::copy(message.begin(), message.end(), mData.data());
+				mData.push_back('\0');
+			}
 
-		asio::const_buffer getDataBuffer() {
-			return asio::buffer(mData, mData.size());
-		}
+			void setData(std::vector<unsigned char> data) {
+				mData.resize(data.size());
+				std::copy(data.begin(), data.end(), mData.begin());
+			}
 
-		const char* getData() {
-			return mData.data();
-		}
+			asio::const_buffer getDataBuffer() {
+				return asio::buffer(mData, mData.size());
+			}
 
-		std::string getDataAsString() {
-			std::string msg = std::string(mData.data(), mData.size());
-			return msg;
-		}
+			const char* getData() {
+				return mData.data();
+			}
 
-		std::vector<unsigned char> getDataAsVector() {
-			return std::vector<unsigned char>(reinterpret_cast<unsigned char>(mData.data()), mData.size());
-		}
+			std::string getDataAsString() {
+				std::string msg = std::string(mData.data(), mData.size());
+				return msg;
+			}
 
-		std::size_t getDataLength() {
-			return mData.size();
-		}
+			std::vector<unsigned char> getDataAsVector() {
+				return std::vector<unsigned char>(reinterpret_cast<unsigned char>(mData.data()), mData.size());
+			}
 
-		void clear() {
-			mData.clear();
-		}
+			std::size_t getDataLength() {
+				return mData.size();
+			}
 
-		bool empty() {
-			return mData.empty();
-		}
+			void clear() {
+				mData.clear();
+			}
 
-		void push_back(char data) {
-			mData.push_back(data);
-		}
+			bool empty() {
+				return mData.empty();
+			}
 
-		void push_back(unsigned char data) {
-			mData.push_back(data);
-		}
+			void push_back(char data) {
+				mData.push_back(data);
+			}
 
-		std::vector<char>::iterator begin() {
-			return mData.begin();
-		}
+			void push_back(unsigned char data) {
+				mData.push_back(data);
+			}
 
-		std::vector<char>::iterator end() {
-			return mData.end();
-		}
+			std::vector<char>::iterator begin() {
+				return mData.begin();
+			}
 
-	protected:
-		Endpoint mEndpoint;
-		std::vector<char> mData;
-	};
+			std::vector<char>::iterator end() {
+				return mData.end();
+			}
+
+		protected:
+			Endpoint mEndpoint;
+			std::vector<char> mData;
+		};
+	}
 }
