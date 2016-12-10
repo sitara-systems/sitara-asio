@@ -38,6 +38,15 @@ void TcpClient::disconnect() {
 	mHeartbeatTimer.cancel();
 }
 
+void TcpClient::send(std::string message) {
+	if (!mIsConnected)
+		return;
+
+	// Start an asynchronous operation to send a heartbeat message.
+	asio::async_write(mSocket, asio::buffer(&message[0], message.length()),
+		[this](const asio::error_code error, size_t bytes_received) { handle_write(error, bytes_received); });
+}
+
 void TcpClient::start_connect(asio::ip::tcp::resolver::iterator resolver) {
 	if (resolver != asio::ip::tcp::resolver::iterator()) {
 		std::printf("ofxAsio::TcpClient -- Trying endpoint %s:%d ...\n", resolver->endpoint().address().to_string().c_str(), resolver->endpoint().port());
@@ -171,8 +180,7 @@ void TcpClient::handle_read(const asio::error_code& ec, size_t bytes_received)
 	}
 }
 
-void TcpClient::start_write()
-{
+void TcpClient::start_write() {
 	if (!mIsConnected)
 		return;
 

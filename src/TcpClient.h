@@ -13,6 +13,7 @@ namespace ofxAsio {
 		static std::shared_ptr<TcpClient> make();
 		void connect(std::string ip_address, int port);
 		void disconnect();
+		void send(std::string message);
 //		void addOnSendFn(std::function<void(std::shared_ptr<Datagram> msg)> response);
 //		void addOnResponseFn(std::function<void(std::shared_ptr<Datagram> msg)> response);
 	protected:
