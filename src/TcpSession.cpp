@@ -49,14 +49,15 @@ void TcpSession::onReceive(const asio::error_code& error, std::size_t bytesRecei
 	if (bytesReceived) {
 		std::printf("ofxAsio::TcpSession::onReceive -- received message %s in %d bytes\n", mIncomingMessage.c_str(), bytesReceived);
 		if (mIncomingMessage[bytesReceived - 1] == mTerminator) {
-			std::printf("ofxAsio::TcpSession::onReceive -- received terminator charactder %s\n", mTerminator);
+			std::printf("ofxAsio::TcpSession::onReceive -- received terminator character %s\n", mTerminator);
 			--bytesReceived;
 			setIncomingBufferSize(bytesReceived);
-			mIsConnected = false;
+			// mIsConnected = false;
 		}
 	}
 
 	if (!error && mIsConnected) {
+		mIncomingMessage += mTerminator;
 		asio::async_write(mSocket, asio::buffer(mIncomingMessage.c_str(), mIncomingMessage.size()),
 			[this](const asio::error_code &error, std::size_t bytes_received) {
 				onWrite(error, bytes_received);

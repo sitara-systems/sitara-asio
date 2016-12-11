@@ -58,8 +58,7 @@ void TcpServer::createSession() {
 	std::shared_ptr<TcpSession> newSession = TcpSession::make(mService);
 	std::vector<std::shared_ptr<TcpSession>>::iterator iterator = mSessions.insert(mSessions.end(), newSession);
 
-	mAcceptor.async_accept(newSession->getSocket(),
-		[this, iterator](const asio::error_code &error) {
+	mAcceptor.async_accept(newSession->getSocket(), [this, iterator](const asio::error_code &error) {
 		onConnect(iterator, error);
 	});
 }

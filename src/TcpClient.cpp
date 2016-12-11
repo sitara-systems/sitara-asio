@@ -43,8 +43,9 @@ void TcpClient::send(std::string message) {
 		return;
 
 	// Start an asynchronous operation to send a heartbeat message.
-	asio::async_write(mSocket, asio::buffer(&message[0], message.length()),
-		[this](const asio::error_code error, size_t bytes_received) { handle_write(error, bytes_received); });
+	asio::async_write(mSocket, asio::buffer(&message[0], message.size()),
+		[this](const asio::error_code error, size_t bytes_received) { handle_write(error, bytes_received); 
+	});
 }
 
 void TcpClient::start_connect(asio::ip::tcp::resolver::iterator resolver) {
@@ -147,9 +148,12 @@ void TcpClient::start_read()
 	// Set a deadline for the read operation.
 	mTimer.expires_from_now(std::chrono::seconds(30));
 
-	// Start an asynchronous operation to read a newline-delimited message.
-	asio::async_read_until(mSocket, input_buffer_, '\n',
-		[this](const asio::error_code& error, size_t bytes_received) { handle_read(error, bytes_received); });
+	// Start an asynchronous operation to read a terminator-delimited message.
+	asio::async_read_until(mSocket, input_buffer_, '\0',
+		[this](const asio::error_code& error, size_t bytes_received) { 
+			handle_read(error, bytes_received); 
+		}
+	);
 }
 
 void TcpClient::handle_read(const asio::error_code& ec, size_t bytes_received)
@@ -167,7 +171,7 @@ void TcpClient::handle_read(const asio::error_code& ec, size_t bytes_received)
 		// Empty messages are heartbeats and so ignored.
 		if (!line.empty())
 		{
-			std::printf("Received: %s\n");
+			std::printf("Received: %s\n", line.c_str());
 		}
 
 		start_read();
@@ -181,12 +185,14 @@ void TcpClient::handle_read(const asio::error_code& ec, size_t bytes_received)
 }
 
 void TcpClient::start_write() {
-	if (!mIsConnected)
+	if (!mIsConnected) {
 		return;
+	}
 
 	// Start an asynchronous operation to send a heartbeat message.
-	asio::async_write(mSocket, asio::buffer("\n", 1),
-		[this](const asio::error_code error, size_t bytes_received) { handle_write(error, bytes_received); });
+	//asio::async_write(mSocket, asio::buffer("\n", 1),
+	//	[this](const asio::error_code error, size_t bytes_received) { handle_write(error, bytes_received); 
+	//});
 }
 
 void TcpClient::handle_write(const asio::error_code& ec, size_t bytes_received)
@@ -194,14 +200,14 @@ void TcpClient::handle_write(const asio::error_code& ec, size_t bytes_received)
 	if (!mIsConnected)
 		return;
 
-	if (!ec)
-	{
+	if (!ec) {
 		// Wait 10 seconds before sending the next heartbeat.
 		mHeartbeatTimer.expires_from_now(std::chrono::seconds(10));
-		mHeartbeatTimer.async_wait([this](const asio::error_code& error) { start_write(); });
+		mHeartbeatTimer.async_wait([this](const asio::error_code& error) { 
+			start_write(); 
+		});
 	}
-	else
-	{
+	else {
 		std::printf("Error on heartbeat: %s\n", ec.message().c_str());
 
 		disconnect();
