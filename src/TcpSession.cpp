@@ -36,8 +36,19 @@ void TcpSession::setTerminator(char terminator) {
 	mTerminator = terminator;
 }
 
-void TcpSession::onWrite(const asio::error_code& error, std::size_t bytesReceived) {
+void TcpSession::addOnReceiveFn(std::function<void(std::string msg)> response) {
+	mOnReceiveFns.push_back(response);
+}
+
+void TcpSession::addOnSendFn(std::function<void(std::string msg)> response) {
+	mOnSendFns.push_back(response);
+}
+
+void TcpSession::onWrite(const asio::error_code& error, std::size_t bytesReceived, std::string message) {
 	if (!error && mIsConnected) {
+		for (auto& callback : mOnSendFns) {
+			callback(message);
+		}
 		receive();
 	}
 	else {
@@ -47,21 +58,25 @@ void TcpSession::onWrite(const asio::error_code& error, std::size_t bytesReceive
 
 void TcpSession::onReceive(const asio::error_code& error, std::size_t bytesReceived) {
 	if (bytesReceived) {
-		std::printf("ofxAsio::TcpSession::onReceive -- received message %s in %d bytes\n", mIncomingMessage.c_str(), bytesReceived);
+		//std::printf("ofxAsio::TcpSession::onReceive -- received message %s in %d bytes\n", mIncomingMessage.c_str(), bytesReceived);
 		if (mIncomingMessage[bytesReceived - 1] == mTerminator) {
 			std::printf("ofxAsio::TcpSession::onReceive -- received terminator character %s\n", mTerminator);
 			--bytesReceived;
 			setIncomingBufferSize(bytesReceived);
-			// mIsConnected = false;
 		}
 	}
 
 	if (!error && mIsConnected) {
+		for (auto& callback : mOnReceiveFns) {
+			callback(mIncomingMessage);
+		}
+
 		mIncomingMessage += mTerminator;
 		asio::async_write(mSocket, asio::buffer(mIncomingMessage.c_str(), mIncomingMessage.size()),
 			[this](const asio::error_code &error, std::size_t bytes_received) {
-				onWrite(error, bytes_received);
+				onWrite(error, bytes_received, mIncomingMessage);
 		});
+
 	}
 	else {
 		std::printf("ofxAsio::TcpSession::onReceive -- Error receiving data. %s\n", error.message().c_str());;

@@ -7,7 +7,7 @@ std::shared_ptr<TcpClient> TcpClient::make() {
 	return Server;
 }
 
-TcpClient::TcpClient() : mService(), mSocket(mService), mWork(mService), mTimer(mService), mHeartbeatTimer(mService), mIsConnected(true) {
+TcpClient::TcpClient() : mService(), mSocket(mService), mWork(mService),  mIsConnected(true) { //mTimer(mService), mHeartbeatTimer(mService),
 	init();
 }
 
@@ -22,20 +22,28 @@ TcpClient::~TcpClient() {
 void TcpClient::connect(std::string ip_address, int port) {
 	// Start the connect actor.
 	mResolver = std::shared_ptr<asio::ip::tcp::resolver>(new asio::ip::tcp::resolver(mService));
-	start_connect(mResolver->resolve(asio::ip::tcp::resolver::query(ip_address, std::to_string(port))));
+	tryConnect(mResolver->resolve(asio::ip::tcp::resolver::query(ip_address, std::to_string(port))));
 
 	// Start the deadline actor. You will note that we're not setting any
 	// particular deadline here. Instead, the connect and input actors will
 	// update the deadline prior to each asynchronous operation.
-	mTimer.async_wait([this](const asio::error_code& error) { check_deadline(error); });
+//	mTimer.async_wait([this](const asio::error_code& error) { checkDeadline(error); });
 }
 
 void TcpClient::disconnect() {
 	std::printf("ofxAsio::TcpClient -- disconnect");
 	mIsConnected = false;
 	mSocket.close();
-	mTimer.cancel();
-	mHeartbeatTimer.cancel();
+//	mTimer.cancel();
+//	mHeartbeatTimer.cancel();
+}
+
+char TcpClient::getTerminator() {
+	return mTerminator;
+}
+
+void TcpClient::setTerminator(char terminator) {
+	mTerminator = terminator;
 }
 
 void TcpClient::send(std::string message) {
@@ -44,20 +52,22 @@ void TcpClient::send(std::string message) {
 
 	// Start an asynchronous operation to send a heartbeat message.
 	asio::async_write(mSocket, asio::buffer(&message[0], message.size()),
-		[this](const asio::error_code error, size_t bytes_received) { handle_write(error, bytes_received); 
-	});
+		[this, message](const asio::error_code error, size_t bytes_received) {
+			onWrite(error, bytes_received, message);
+		}
+	);
 }
 
-void TcpClient::start_connect(asio::ip::tcp::resolver::iterator resolver) {
+void TcpClient::tryConnect(asio::ip::tcp::resolver::iterator resolver) {
 	if (resolver != asio::ip::tcp::resolver::iterator()) {
 		std::printf("ofxAsio::TcpClient -- Trying endpoint %s:%d ...\n", resolver->endpoint().address().to_string().c_str(), resolver->endpoint().port());
 		// Set a deadline for the connect operation.
-		mTimer.expires_from_now(std::chrono::seconds(60));
+//		mTimer.expires_from_now(std::chrono::seconds(60));
 
 		// Start the asynchronous connect operation.
 		mSocket.async_connect(resolver->endpoint(),
 			[this, resolver](const asio::error_code& error) {
-			handle_connect(error, resolver);
+				onConnect(error, resolver);
 			});
 	}
 	else {
@@ -68,14 +78,15 @@ void TcpClient::start_connect(asio::ip::tcp::resolver::iterator resolver) {
 
 
 void TcpClient::init() {
-
+	mTerminator = '\0';
 	mServiceThread = std::thread([&] {
 		mService.run();
 	});
 
 }
 
-void TcpClient::check_deadline(const asio::error_code& error) {
+/*
+void TcpClient::checkDeadline(const asio::error_code& error) {
 	if (!mIsConnected) {
 		std::printf("ofxAsio::TcpClient -- not connected.\n");
 		return;
@@ -96,10 +107,11 @@ void TcpClient::check_deadline(const asio::error_code& error) {
 	}
 
 	// Put the actor back to sleep.
-	mTimer.async_wait([this](const asio::error_code& error) { check_deadline(error); });
+	mTimer.async_wait([this](const asio::error_code& error) { checkDeadline(error); });
 }
+*/
 
-void TcpClient::handle_connect(const asio::error_code& ec,
+void TcpClient::onConnect(const asio::error_code& ec,
 	asio::ip::tcp::resolver::iterator endpoint_iter)
 {
 	if (!mIsConnected) {
@@ -115,7 +127,7 @@ void TcpClient::handle_connect(const asio::error_code& ec,
 		std::printf("ofxAsio::TcpClient -- Connect timed out\n");
 
 		// Try the next available endpoint.
-		start_connect(++endpoint_iter);
+		tryConnect(++endpoint_iter);
 	}
 
 	// Check if the connect operation failed before the deadline expired.
@@ -127,36 +139,36 @@ void TcpClient::handle_connect(const asio::error_code& ec,
 		mSocket.close();
 
 		// Try the next available endpoint.
-		start_connect(++endpoint_iter);
+		tryConnect(++endpoint_iter);
 	}
 
 	// Otherwise we have successfully established a connection.
 	else
 	{
-		std::printf("ofxAsio::TcpClient -- Connected to %s\n", endpoint_iter->endpoint());
+		std::printf("ofxAsio::TcpClient -- Connected!\n");
 
 		// Start the input actor.
-		start_read();
+		receive();
 
 		// Start the heartbeat actor.
-		start_write();
+		//sendHeartbeat();
 	}
 }
 
-void TcpClient::start_read()
+void TcpClient::receive()
 {
 	// Set a deadline for the read operation.
-	mTimer.expires_from_now(std::chrono::seconds(30));
+//	mTimer.expires_from_now(std::chrono::seconds(30));
 
 	// Start an asynchronous operation to read a terminator-delimited message.
-	asio::async_read_until(mSocket, input_buffer_, '\0',
+	asio::async_read_until(mSocket, input_buffer_, mTerminator,
 		[this](const asio::error_code& error, size_t bytes_received) { 
-			handle_read(error, bytes_received); 
+			onReceive(error, bytes_received); 
 		}
 	);
 }
 
-void TcpClient::handle_read(const asio::error_code& ec, size_t bytes_received)
+void TcpClient::onReceive(const asio::error_code& ec, size_t bytes_received)
 {
 	if (!mIsConnected)
 		return;
@@ -168,48 +180,63 @@ void TcpClient::handle_read(const asio::error_code& ec, size_t bytes_received)
 		std::istream is(&input_buffer_);
 		std::getline(is, line);
 
-		// Empty messages are heartbeats and so ignored.
-		if (!line.empty())
-		{
-			std::printf("Received: %s\n", line.c_str());
+		mIncomingMessage = line;
+		
+		for (auto& callback : mOnReceiveFns) {
+			callback(mIncomingMessage);
 		}
 
-		start_read();
+		receive();
 	}
 	else
 	{
-		std::printf("Error on receive: %s\n", ec.message().c_str());
+		std::printf("ofxAsio::TcpClient -- Error on receive: %s\n", ec.message().c_str());
 
 		disconnect();
 	}
 }
 
-void TcpClient::start_write() {
+void TcpClient::sendHeartbeat() {
 	if (!mIsConnected) {
 		return;
 	}
 
+	std::string heartbeatMessage = "\n";
 	// Start an asynchronous operation to send a heartbeat message.
-	//asio::async_write(mSocket, asio::buffer("\n", 1),
-	//	[this](const asio::error_code error, size_t bytes_received) { handle_write(error, bytes_received); 
-	//});
+	asio::async_write(mSocket, asio::buffer(heartbeatMessage, 1),
+		[this, heartbeatMessage](const asio::error_code error, size_t bytes_received) {
+			onWrite(error, bytes_received, heartbeatMessage); 
+		}
+	);
 }
 
-void TcpClient::handle_write(const asio::error_code& ec, size_t bytes_received)
-{
+void TcpClient::onWrite(const asio::error_code& ec, size_t bytes_received, std::string message) {
 	if (!mIsConnected)
 		return;
 
 	if (!ec) {
 		// Wait 10 seconds before sending the next heartbeat.
+		/*
 		mHeartbeatTimer.expires_from_now(std::chrono::seconds(10));
 		mHeartbeatTimer.async_wait([this](const asio::error_code& error) { 
-			start_write(); 
+			sendHeartbeat(); 
 		});
+		*/
+		for (auto& callback : mOnSendFns) {
+			callback(message);
+		}
 	}
 	else {
-		std::printf("Error on heartbeat: %s\n", ec.message().c_str());
+		std::printf("ofxAsio::TcpClient -- Error on heartbeat: %s\n", ec.message().c_str());
 
 		disconnect();
 	}
+}
+
+void TcpClient::addOnReceiveFn(std::function<void(std::string msg)> response) {
+	mOnReceiveFns.push_back(response);
+}
+
+void TcpClient::addOnSendFn(std::function<void(std::string msg)> response) {
+	mOnSendFns.push_back(response);
 }

@@ -23,6 +23,21 @@ void TcpServer::start() {
 	createSession();
 }
 
+
+void TcpServer::addOnReceiveFn(std::function<void(std::string msg)> response) {
+	mOnReceiveFns.push_back(response);
+	for (auto& session : mSessions) {
+		session->addOnReceiveFn(response);
+	}
+}
+
+void TcpServer::addOnSendFn(std::function<void(std::string msg)> response) {
+	mOnSendFns.push_back(response);
+	for (auto& session : mSessions) {
+		session->addOnSendFn(response);
+	}
+}
+
 void TcpServer::init(int port) {
 	mLocalEndpoint = asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port);
 
@@ -57,6 +72,14 @@ void TcpServer::createSession() {
 
 	std::shared_ptr<TcpSession> newSession = TcpSession::make(mService);
 	std::vector<std::shared_ptr<TcpSession>>::iterator iterator = mSessions.insert(mSessions.end(), newSession);
+
+	for (auto& fn : mOnReceiveFns) {
+		newSession->addOnReceiveFn(fn);
+	}
+
+	for (auto& fn : mOnSendFns) {
+		newSession->addOnSendFn(fn);
+	}
 
 	mAcceptor.async_accept(newSession->getSocket(), [this, iterator](const asio::error_code &error) {
 		onConnect(iterator, error);

@@ -11,6 +11,8 @@ namespace ofxAsio {
     static std::shared_ptr<TcpServer> make(int port);
     ~TcpServer();
     void start();
+	void addOnSendFn(std::function<void(std::string msg)> response);
+	void addOnReceiveFn(std::function<void(std::string msg)> response);
   protected:
 	  TcpServer(int port);
 	  void init(int port);
@@ -23,6 +25,8 @@ namespace ofxAsio {
 	  asio::ip::tcp::socket mSocket;
 	  asio::ip::tcp::endpoint mLocalEndpoint;
 	  std::vector < std::shared_ptr<TcpSession>> mSessions;
+	  std::vector<std::function<void(std::string msg)> > mOnSendFns;
+	  std::vector<std::function<void(std::string msg)> > mOnReceiveFns;
   };
   
 }
