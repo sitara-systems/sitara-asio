@@ -57,6 +57,7 @@ using namespace ofxAsio;
   
 void UdpSocket::receive() {
 	asio::mutable_buffers_1 buffer = asio::mutable_buffers_1((char*)mIncomingMessage.c_str(), mIncomingMessage.size());
+
 	mSocket.async_receive_from(buffer, mIncomingEndpoint,
 		[this](const asio::error_code &error, size_t bytes_received) {
 			mIncomingDatagram->setEndpoint(mIncomingEndpoint);

@@ -2,8 +2,6 @@
 
 #include "ofMain.h"
 #include "ofxAsio.h"
-
-
 class ofApp : public ofBaseApp{
 
 	public:
@@ -23,6 +21,6 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 
-		std::shared_ptr<ofxAsio::UdpReceiver> mReceiver;
-		
+		std::shared_ptr<ofxAsio::TcpServer> mServer;
+
 };
