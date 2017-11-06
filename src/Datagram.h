@@ -5,7 +5,6 @@
 #include <string>
 
 namespace midnight {
-
 	namespace ofxAsio {
 		class Datagram {
 		public:
