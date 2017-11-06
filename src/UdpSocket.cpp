@@ -1,6 +1,6 @@
 #include "UdpSocket.h"
 
-using namespace midnight::ofxAsio;
+using namespace midnight::sockets;
 
   UdpSocket::UdpSocket() : mSocket(mService, asio::ip::udp::endpoint(asio::ip::address_v4::any(), 0)),
 	  mWork(mService), mLocalEndpoint(asio::ip::udp::endpoint(asio::ip::address_v4::any(), 0)) {
@@ -50,7 +50,7 @@ using namespace midnight::ofxAsio;
 			}
 		}
 		else{ 
-			std::printf("ofxAsio::UdpSocket::send -- Cannot send data. %s\n", error.message().c_str());;
+			std::printf("asio::UdpSocket::send -- Cannot send data. %s\n", error.message().c_str());;
 		}
 	});
   }
@@ -73,7 +73,7 @@ void UdpSocket::onReceive(const asio::error_code &error, size_t bytes_received) 
 		}
 	}
 	else {
-		std::printf("ofxAsio::UdpSocket::receive -- Error receiving data. %s\n", error.message().c_str());;
+		std::printf("midnight::sockets::UdpSocket::receive -- Error receiving data. %s\n", error.message().c_str());;
 	}
 	
 	// queues up the next async receive after this receive has completed.

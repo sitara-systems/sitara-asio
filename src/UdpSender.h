@@ -12,7 +12,7 @@ sender.send(datagram)
 
  */
 namespace midnight {
-	namespace ofxAsio {
+	namespace sockets {
 		class UdpSender : public UdpSocket {
 		public:
 			static std::shared_ptr<UdpSender> make();

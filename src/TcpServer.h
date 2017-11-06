@@ -6,7 +6,7 @@
 #include "Datagram.h"
 
 namespace midnight {
-	namespace ofxAsio {
+	namespace sockets {
 		class TcpServer {
 		public:
 			static std::shared_ptr<TcpServer> make(int port);

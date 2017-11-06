@@ -3,7 +3,7 @@
 #include "asio/asio.hpp"
 
 namespace midnight {
-	namespace ofxAsio {
+	namespace sockets {
 		class TcpSession {
 		public:
 			~TcpSession();

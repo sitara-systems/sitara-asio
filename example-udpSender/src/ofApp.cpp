@@ -1,6 +1,6 @@
 #include "ofApp.h"
 
-using namespace ofxAsio;
+using namespace midnight::sockets;
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -74,6 +74,6 @@ void ofApp::gotMessage(ofMessage msg){
 }
 
 //--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
+void ofApp::dragEvent(ofDragInfo dragInfo){
 
 }

@@ -1,6 +1,6 @@
 #include "TcpServer.h"
 
-using namespace midnight::ofxAsio;
+using namespace midnight::sockets;
 
 std::shared_ptr<TcpServer> TcpServer::make(int port) {
 	std::shared_ptr<TcpServer> Server(new TcpServer(port));
@@ -26,7 +26,7 @@ void TcpServer::start() {
 void TcpServer::init(int port) {
 	mLocalEndpoint = asio::ip::tcp::endpoint(asio::ip::tcp::v4(), port);
 
-	std::printf("ofxAsio::TcpServer -- Creating endpoint %s:%d ...\n", mLocalEndpoint.address().to_string().c_str(), mLocalEndpoint.port());
+	std::printf("midnight::sockets::TcpServer -- Creating endpoint %s:%d ...\n", mLocalEndpoint.address().to_string().c_str(), mLocalEndpoint.port());
 
 	mAcceptor.open(mLocalEndpoint.protocol());
 	mAcceptor.set_option(asio::ip::tcp::acceptor::reuse_address(true));
@@ -41,13 +41,13 @@ void TcpServer::init(int port) {
 
 void TcpServer::onConnect(std::vector<std::shared_ptr<TcpSession>>::iterator session_iter, const asio::error_code& error) {
 	if (!error) {
-		std::printf("ofxAsio::TcpServer -- Connection from %s received!\n", (*session_iter)->getSocket().remote_endpoint().address().to_string().c_str());
+		std::printf("midnight::sockets::TcpServer -- Connection from %s received!\n", (*session_iter)->getSocket().remote_endpoint().address().to_string().c_str());
 
 		(*session_iter)->start();
 		createSession();
 	}
 	else {
-		std::printf("ofxAsio::TcpServer::onConnect -- Error receiving data. %s\n", error.message().c_str());
+		std::printf("midnight::sockets::TcpServer::onConnect -- Error receiving data. %s\n", error.message().c_str());
 		mSessions.erase(session_iter);
 	}
 }

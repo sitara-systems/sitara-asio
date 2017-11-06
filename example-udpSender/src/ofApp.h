@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "ofxAsio.h"
+#include "Asio.h"
 
 class ofApp : public ofBaseApp{
 
@@ -21,6 +21,6 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-	
-		std::shared_ptr<ofxAsio::UdpSender> mSender;
+
+		std::shared_ptr<midnight::sockets::UdpSender> mSender;
 };

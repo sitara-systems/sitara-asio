@@ -7,7 +7,7 @@
 #include "Datagram.h"
 
 namespace midnight {
-	namespace ofxAsio {
+	namespace sockets {
 		class TcpClient {
 		public:
 			~TcpClient();

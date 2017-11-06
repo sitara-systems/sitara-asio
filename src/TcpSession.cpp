@@ -1,6 +1,6 @@
 #include "TcpSession.h"
 
-using namespace midnight::ofxAsio;
+using namespace midnight::sockets;
 
 std::shared_ptr<TcpSession> TcpSession::make(asio::io_service& service) {
 	std::shared_ptr<TcpSession> session = std::shared_ptr<TcpSession>(new TcpSession(service));
@@ -15,11 +15,11 @@ TcpSession::TcpSession(asio::io_service& service) : mSocket(service) {
 
 
 TcpSession::~TcpSession() {
-	std::printf("ofxAsio::TcpSession -- TcpSession ended.\n");
+	std::printf("midnight::sockets::TcpSession -- TcpSession ended.\n");
 }
 
 void TcpSession::start() {
-	std::printf("ofxAsio::TcpSession -- TcpSession starting.\n");
+	std::printf("midnight::sockets::TcpSession -- TcpSession starting.\n");
 	mIsConnected = true;
 	receive();
 }
@@ -41,15 +41,15 @@ void TcpSession::onWrite(const asio::error_code& error, std::size_t bytesReceive
 		receive();
 	}
 	else {
-		std::printf("ofxAsio::TcpSession::onWrite -- Error writing data. %s\n", error.message().c_str());;
+		std::printf("midnight::sockets::TcpSession::onWrite -- Error writing data. %s\n", error.message().c_str());;
 	}
 }
 
 void TcpSession::onReceive(const asio::error_code& error, std::size_t bytesReceived) {
 	if (bytesReceived) {
-		std::printf("ofxAsio::TcpSession::onReceive -- received message %s in %d bytes\n", mIncomingMessage.c_str(), bytesReceived);
+		std::printf("midnight::sockets::TcpSession::onReceive -- received message %s in %d bytes\n", mIncomingMessage.c_str(), bytesReceived);
 		if (mIncomingMessage[bytesReceived - 1] == mTerminator) {
-			std::printf("ofxAsio::TcpSession::onReceive -- received terminator charactder %s\n", mTerminator);
+			std::printf("midnight::sockets::TcpSession::onReceive -- received terminator charactder %s\n", mTerminator);
 			--bytesReceived;
 			setIncomingBufferSize(bytesReceived);
 			mIsConnected = false;
@@ -63,7 +63,7 @@ void TcpSession::onReceive(const asio::error_code& error, std::size_t bytesRecei
 		});
 	}
 	else {
-		std::printf("ofxAsio::TcpSession::onReceive -- Error receiving data. %s\n", error.message().c_str());;
+		std::printf("midnight::sockets::TcpSession::onReceive -- Error receiving data. %s\n", error.message().c_str());;
 	}
 }
 

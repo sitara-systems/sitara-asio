@@ -15,7 +15,7 @@ receiver.start();
  */
 
 namespace midnight {
-	namespace ofxAsio {
+	namespace sockets {
 
 		class UdpReceiver : public UdpSocket {
 		public:

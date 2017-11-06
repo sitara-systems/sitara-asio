@@ -1,6 +1,6 @@
 #include "UdpSender.h"
 
-using namespace midnight::ofxAsio;
+using namespace midnight::sockets;
 
 std::shared_ptr<UdpSender> UdpSender::make() {
 	std::shared_ptr<UdpSender> sender(new UdpSender());
