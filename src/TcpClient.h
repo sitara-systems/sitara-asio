@@ -1,5 +1,9 @@
 #pragma once
 
+#ifndef ASIO_STANDALONE
+#define ASIO_STANDALONE
+#endif
+
 #include <thread>
 #include <chrono>
 #include "asio/asio.hpp"

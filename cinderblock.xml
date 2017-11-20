@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<cinder>
+<block
+	name="midcomm-asio"
+	id="org.libcinder.midcomm-asio"
+  git="https://github.com/MidnightCommercial/midcomm-asio.git"
+	author="Midnight Commercial, nathan lachenmyer"
+	summary="Wraps ASIO for convenience"
+	license="MIT"
+  url="https://github.com/MidnightCommercial/midcomm-asio"
+  core="true"
+	>
+  
+	<sourcePattern>src/*.cpp</sourcePattern>
+  <headerPattern>src/*.h</headerPattern>
+	<includePath>libs/asio-1.11.0/include/</includePath>
+  <includePath>src/</includePath>
+</block>
+</cinder>
