@@ -37,7 +37,7 @@ struct time_traits<boost::posix_time::ptime>
   /// The time type.
   typedef boost::posix_time::ptime time_type;
 
-  /// The duration type.
+  /// The duration type.3
   typedef boost::posix_time::time_duration duration_type;
 
   /// Get the current time.

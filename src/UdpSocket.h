@@ -10,7 +10,6 @@
 
 namespace midnight {
 	namespace sockets {
-
 		class UdpSocket {
 		public:
 			UdpSocket();
@@ -38,5 +37,3 @@ namespace midnight {
 		};
 	}
 }
-
-

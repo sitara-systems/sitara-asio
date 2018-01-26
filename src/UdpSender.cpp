@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include "UdpSender.h"
 
 using namespace midnight::sockets;
@@ -17,6 +18,27 @@ std::shared_ptr<UdpSender> UdpSender::make(std::string localAddress, int port) {
 	return sender;
 }
 
+=======
+#include "UdpSender.h"
+
+using namespace ofxAsio;
+
+std::shared_ptr<UdpSender> UdpSender::make() {
+	std::shared_ptr<UdpSender> sender(new UdpSender());
+	return sender;
+}
+
+std::shared_ptr<UdpSender> UdpSender::make(int port) {
+	std::shared_ptr<UdpSender> sender(new UdpSender(port));
+	return sender;
+}
+
+std::shared_ptr<UdpSender> UdpSender::make(std::string localAddress, int port) {
+	std::shared_ptr<UdpSender> sender(new UdpSender(localAddress, port));
+	return sender;
+}
+
+>>>>>>> 00371c6502e9a17e37b9c6febbe8352dabfb7372
 UdpSender::UdpSender() : UdpSocket() {
 
 }
