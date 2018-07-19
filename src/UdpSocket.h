@@ -8,7 +8,7 @@
 #include <array>
 #include <string>
 
-namespace midnight {
+namespace ofxAsio {
 	namespace sockets {
 		class UdpSocket {
 		public:

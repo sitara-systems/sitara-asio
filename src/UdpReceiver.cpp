@@ -1,14 +1,7 @@
-<<<<<<< HEAD
 #include "UdpReceiver.h"
 
-using namespace midnight::sockets;
+using namespace ofxAsio::sockets;
 
-=======
-#include "UdpReceiver.h"
-
-using namespace ofxAsio;
-
->>>>>>> 00371c6502e9a17e37b9c6febbe8352dabfb7372
 std::shared_ptr<UdpReceiver> UdpReceiver::make(int port) {
 	std::shared_ptr<UdpReceiver> receiver(new UdpReceiver(port));
 	return receiver;
@@ -31,6 +24,6 @@ UdpReceiver::~UdpReceiver() {
 }
 
 void UdpReceiver::start() {
-	std::printf("midnight::sockets::UdpReceiver -- listening for messages at %s:%d\n", mLocalEndpoint.getIpAddress().c_str(), mLocalEndpoint.getPort());
+	std::printf("ofxAsio::sockets::UdpReceiver -- listening for messages at %s:%d\n", mLocalEndpoint.getIpAddress().c_str(), mLocalEndpoint.getPort());
 	receive();
 }

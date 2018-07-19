@@ -3,7 +3,7 @@
 #include "asio/asio.hpp"
 #include <string>
 
-namespace midnight {
+namespace ofxAsio {
 	namespace sockets {
 		class Endpoint {
 		public:
