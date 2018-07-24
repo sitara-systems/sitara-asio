@@ -29,7 +29,7 @@ using namespace ofxAsio::udp;
   void UdpSocket::init() {
 	  mIncomingDatagram = std::make_shared<Datagram>();
 	  mIncomingEndpoint = asio::ip::udp::endpoint(asio::ip::udp::v4(), 0);
-	  setIncomingBufferSize(1024);
+	  setIncomingBufferSize(4096);
 	  mServiceThread = std::thread([&] {
 		  mService.run();
 	  });
@@ -62,7 +62,7 @@ void UdpSocket::receive() {
 	mSocket.async_receive_from(buffer, mIncomingEndpoint,
 		[this](const asio::error_code &error, size_t bytes_received) {
 			mIncomingDatagram->setEndpoint(mIncomingEndpoint);
-			setIncomingBufferSize(bytes_received);
+			//setIncomingBufferSize(bytes_received);
 			mIncomingDatagram->setData(mIncomingMessage);
 			onReceive(error, bytes_received);
 	});
