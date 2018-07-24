@@ -1,6 +1,6 @@
 #include "TcpSession.h"
 
-using namespace ofxAsio::sockets;
+using namespace ofxAsio;
 using namespace ofxAsio::tcp;
 
 std::shared_ptr<TcpSession> TcpSession::make(asio::io_service& service) {

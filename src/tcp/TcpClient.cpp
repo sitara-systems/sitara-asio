@@ -1,6 +1,6 @@
 #include "TcpClient.h"
 
-using namespace ofxAsio::sockets;
+using namespace ofxAsio;
 using namespace ofxAsio::tcp;
 
 std::shared_ptr<TcpClient> TcpClient::make() {

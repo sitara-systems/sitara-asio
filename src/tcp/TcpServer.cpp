@@ -1,6 +1,6 @@
 #include "TcpServer.h"
 
-using namespace ofxAsio::sockets;
+using namespace ofxAsio;
 using namespace ofxAsio::tcp;
 
 std::shared_ptr<TcpServer> TcpServer::make(int port) {

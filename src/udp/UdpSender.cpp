@@ -1,6 +1,6 @@
 #include "UdpSender.h"
 
-using namespace ofxAsio::sockets;
+using namespace ofxAsio;
 using namespace ofxAsio::udp;
 
 std::shared_ptr<UdpSender> UdpSender::make() {

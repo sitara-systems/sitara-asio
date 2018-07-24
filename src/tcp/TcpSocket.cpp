@@ -1,6 +1,6 @@
 #include "TcpSocket.h"
 
-using namespace ofxAsio::sockets;
+using namespace ofxAsio;
 using namespace ofxAsio::tcp;
 
   TcpSocket::TcpSocket() : mSocket(mService, asio::ip::tcp::endpoint(asio::ip::address_v4::any(), 0)),
