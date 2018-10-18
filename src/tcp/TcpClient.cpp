@@ -136,7 +136,7 @@ void TcpClient::handle_connect(const asio::error_code& ec,
 	// Otherwise we have successfully established a connection.
 	else
 	{
-		std::printf("ofxAsio::sockets::TcpClient -- Connected to %s\n", endpoint_iter->endpoint());
+		std::printf("ofxAsio::sockets::TcpClient -- Connected to %s:%d\n", endpoint_iter->endpoint().address().to_string().c_str(), endpoint_iter->endpoint().port());
 
 		// Start the input actor.
 		start_read();
@@ -170,7 +170,7 @@ void TcpClient::handle_read(const asio::error_code& ec, size_t bytes_received) {
 		// Empty messages are heartbeats and so ignored.
 		if (!line.empty())
 		{
-			std::printf("Received: %s\n");
+			std::printf("Received: %s\n", line.c_str());
 		}
 
 		start_read();
