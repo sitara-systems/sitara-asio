@@ -86,7 +86,13 @@ namespace ofxAsio {
 		}
 
 		std::vector<unsigned char> getDataAsVector() {
-			return std::vector<unsigned char>(reinterpret_cast<unsigned char>(mData.data()), mData.size());
+			std::vector<unsigned char> dataVector;
+			dataVector.reserve(mData.size());
+			for (auto c : mData)
+			{
+				dataVector.push_back((unsigned char)c);
+			}
+			return dataVector;
 		}
 
 		std::size_t getDataLength() {
