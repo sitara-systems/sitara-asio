@@ -64,7 +64,6 @@ namespace ofxAsio {
 		void setData(std::string message) {
 			mData.resize(message.size());
 			std::copy(message.begin(), message.end(), mData.data());
-			mData.push_back('\0');
 		}
 
 		void setData(std::vector<unsigned char> data) {

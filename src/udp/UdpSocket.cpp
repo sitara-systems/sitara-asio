@@ -62,7 +62,7 @@ void UdpSocket::receive() {
 	mSocket.async_receive_from(buffer, mIncomingEndpoint,
 		[this](const asio::error_code &error, size_t bytes_received) {
 			mIncomingDatagram->setEndpoint(mIncomingEndpoint);
-			//setIncomingBufferSize(bytes_received);
+			setIncomingBufferSize(bytes_received);
 			mIncomingDatagram->setData(mIncomingMessage);
 			onReceive(error, bytes_received);
 	});
