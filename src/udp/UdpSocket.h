@@ -8,7 +8,7 @@
 #include <array>
 #include <string>
 
-namespace ofxAsio {
+namespace sitara {
 	namespace udp {
 		class UdpSocket {
 		public:
@@ -35,5 +35,6 @@ namespace ofxAsio {
 			std::vector<std::function<void(std::shared_ptr<Datagram> msg)> > mOnReceiveFns;
 			std::vector<std::function<void(std::shared_ptr<Datagram> msg)> > mOnSendFns;
 		};
+
 	}
 }

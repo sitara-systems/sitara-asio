@@ -14,8 +14,8 @@ receiver.start();
 
  */
 
-namespace ofxAsio {
-	namespace udp {
+namespace sitara {
+		namespace udp {
 
 		class UdpReceiver : public UdpSocket {
 		public:

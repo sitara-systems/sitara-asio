@@ -6,7 +6,7 @@
 #include "asio/system_timer.hpp"
 #include "../Datagram.h"
 
-namespace ofxAsio {
+namespace sitara {
 	namespace tcp {
 		class TcpClient {
 		public:
@@ -43,5 +43,6 @@ namespace ofxAsio {
 			std::vector<std::function<void(std::shared_ptr<Datagram> msg)> > mOnSendFns;
 			std::vector<std::function<void(std::shared_ptr<Datagram> msg)> > mOnResponseFns;
 		};
+
 	}
 }

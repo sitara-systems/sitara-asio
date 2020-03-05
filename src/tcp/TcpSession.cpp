@@ -1,7 +1,7 @@
 #include "TcpSession.h"
 
-using namespace ofxAsio;
-using namespace ofxAsio::tcp;
+using namespace sitara;
+using namespace sitara::tcp;
 
 std::shared_ptr<TcpSession> TcpSession::make(asio::io_service& service) {
 	std::shared_ptr<TcpSession> session = std::shared_ptr<TcpSession>(new TcpSession(service));

@@ -2,7 +2,7 @@
 
 #include "asio/asio.hpp"
 
-namespace ofxAsio {
+namespace sitara {
 	namespace tcp {
 		class TcpSession {
 		public:
@@ -23,5 +23,6 @@ namespace ofxAsio {
 			bool mIsConnected;
 			char mTerminator;
 		};
+
 	}
 }

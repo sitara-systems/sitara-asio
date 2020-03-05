@@ -1,7 +1,7 @@
 #include "TcpSocket.h"
 
-using namespace ofxAsio;
-using namespace ofxAsio::tcp;
+using namespace sitara;
+using namespace sitara::tcp;
 
   TcpSocket::TcpSocket() : mSocket(mService, asio::ip::tcp::endpoint(asio::ip::address_v4::any(), 0)),
 	  mWork(mService), mLocalEndpoint(asio::ip::tcp::endpoint(asio::ip::address_v4::any(), 0)) {

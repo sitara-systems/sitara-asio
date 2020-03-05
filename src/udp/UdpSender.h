@@ -11,8 +11,9 @@ std::shared_ptr<Datagram> datagram(new Datagram("Hello world", "192.168.0.27", 8
 sender.send(datagram)
 
  */
-namespace ofxAsio {
+ namespace sitara {
 	namespace udp {
+
 		class UdpSender : public UdpSocket {
 		public:
 			static std::shared_ptr<UdpSender> make();

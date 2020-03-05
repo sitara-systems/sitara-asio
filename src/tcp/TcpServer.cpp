@@ -1,7 +1,7 @@
 #include "TcpServer.h"
 
-using namespace ofxAsio;
-using namespace ofxAsio::tcp;
+using namespace sitara;
+using namespace sitara::tcp;
 
 std::shared_ptr<TcpServer> TcpServer::make(int port) {
 	std::shared_ptr<TcpServer> Server(new TcpServer(port));

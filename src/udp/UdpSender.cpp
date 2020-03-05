@@ -1,7 +1,7 @@
 #include "UdpSender.h"
 
-using namespace ofxAsio;
-using namespace ofxAsio::udp;
+using namespace sitara;
+using namespace sitara::udp;
 
 std::shared_ptr<UdpSender> UdpSender::make() {
 	std::shared_ptr<UdpSender> sender(new UdpSender());

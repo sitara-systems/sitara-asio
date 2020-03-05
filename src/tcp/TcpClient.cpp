@@ -1,7 +1,7 @@
 #include "TcpClient.h"
 
-using namespace ofxAsio;
-using namespace ofxAsio::tcp;
+using namespace sitara;
+using namespace sitara::tcp;
 
 std::shared_ptr<TcpClient> TcpClient::make() {
 	std::shared_ptr<TcpClient> Server(new TcpClient());

@@ -4,7 +4,7 @@
 #include "Endpoint.h"
 #include <string>
 
-namespace ofxAsio {
+namespace sitara {
 	class Datagram {
 	public:
 		Datagram() {
@@ -120,4 +120,5 @@ namespace ofxAsio {
 		Endpoint mEndpoint;
 		std::vector<char> mData;
 	};
+
 }

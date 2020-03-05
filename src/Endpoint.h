@@ -3,7 +3,7 @@
 #include "asio/asio.hpp"
 #include <string>
 
-namespace ofxAsio {
+namespace sitara {
 	class Endpoint {
 	public:
 		Endpoint() {
@@ -42,4 +42,5 @@ namespace ofxAsio {
 	protected:
 		asio::ip::udp::endpoint mEndpoint;
 	};
+
 }

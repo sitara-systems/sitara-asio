@@ -1,7 +1,7 @@
 #include "UdpSocket.h"
 
-using namespace ofxAsio;
-using namespace ofxAsio::udp;
+using namespace sitara;
+using namespace sitara::udp;
 
   UdpSocket::UdpSocket() : mSocket(mService, asio::ip::udp::endpoint(asio::ip::address_v4::any(), 0)),
 	  mWork(mService), mLocalEndpoint(asio::ip::udp::endpoint(asio::ip::address_v4::any(), 0)) {

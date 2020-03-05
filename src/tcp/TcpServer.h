@@ -5,7 +5,7 @@
 #include "TcpSession.h"
 #include "../Datagram.h"
 
-namespace ofxAsio {
+namespace sitara {
 	namespace tcp {
 		class TcpServer {
 		public:
@@ -25,5 +25,6 @@ namespace ofxAsio {
 			asio::ip::tcp::endpoint mLocalEndpoint;
 			std::vector < std::shared_ptr<TcpSession>> mSessions;
 		};
+
 	}
 }

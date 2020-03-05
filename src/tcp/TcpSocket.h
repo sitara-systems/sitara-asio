@@ -8,7 +8,7 @@
 #include <array>
 #include <string>
 
-namespace ofxAsio {
+namespace sitara {
 	namespace tcp {
 		class TcpSocket {
 		public:
@@ -27,5 +27,6 @@ namespace ofxAsio {
 			asio::ip::tcp::endpoint mIncomingEndpoint;
 			std::string mIncomingMessage;
 		};
+
 	}
 }

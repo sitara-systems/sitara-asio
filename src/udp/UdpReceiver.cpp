@@ -1,7 +1,7 @@
 #include "UdpReceiver.h"
 
-using namespace ofxAsio;
-using namespace ofxAsio::udp;
+using namespace sitara;
+using namespace sitara::udp;
 
 std::shared_ptr<UdpReceiver> UdpReceiver::make(int port) {
 	std::shared_ptr<UdpReceiver> receiver(new UdpReceiver(port));
