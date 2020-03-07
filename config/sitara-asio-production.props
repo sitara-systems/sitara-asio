@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <ASIO_ROOT>..\libs\asio-1.11.0</ASIO_ROOT>
+    <SITARA_ASIO_ROOT>..\..\..\..\dependencies\ofxAsio</SITARA_ASIO_ROOT>
+  </PropertyGroup>
+  <PropertyGroup>
+    <_PropertySheetDisplayName>sitara-asio-production</_PropertySheetDisplayName>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(SITARA_ASIO_ROOT)\src;$(ASIO_ROOT)\include;$(OSC_ROOT)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions> ASIO_HAS_STD_ATOMIC;ASIO_HAS_STD_TYPE_TRAITS;_WIN32_WINNT=0x0602;ASIO_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="ASIO_ROOT">
+      <Value>$(ASIO_ROOT)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="SITARA_ASIO_ROOT">
+      <Value>$(SITARA_ASIO_ROOT)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>
