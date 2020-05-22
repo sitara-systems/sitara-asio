@@ -8,9 +8,9 @@ using namespace ci::app;
 using namespace std;
 
 class UdpExampleApp : public App {
-  public:
+public:
 	void setup() override;
-	void mouseDown( MouseEvent event ) override;
+	void mouseDown(MouseEvent event) override;
 	void update() override;
 	void draw() override;
 
@@ -31,7 +31,7 @@ void UdpExampleApp::setup() {
 	mReceiver->start();
 }
 
-void UdpExampleApp::mouseDown( MouseEvent event )
+void UdpExampleApp::mouseDown(MouseEvent event)
 {
 }
 
@@ -49,7 +49,7 @@ void UdpExampleApp::update() {
 
 void UdpExampleApp::draw()
 {
-	gl::clear( Color( 0, 0, 0 ) ); 
+	gl::clear(Color(0, 0, 0));
 }
 
-CINDER_APP( UdpExampleApp, RendererGl, [=](cinder::app::App::Settings* settings) {settings->setConsoleWindowEnabled(); })
+CINDER_APP(UdpExampleApp, RendererGl, [=](cinder::app::App::Settings* settings) {settings->setConsoleWindowEnabled(); })
