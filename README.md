@@ -1,4 +1,4 @@
-# ofxAsio
+# sitara-asio
 
 A wrapper to simplify using the Asio library for asynchronous networking in openFrameworks and Cinder.  I created this addon because I was frustrated with the limitations of `ofxUdpManager` and wanted something a bit more robust.  In addition, I wanted to create something that was cross-platform and even framework agnostic.  You'll find that this addon doesn't use any openFrameworks-specific classes, and can be dropped into any C++ project with minimal tweaking.
 
