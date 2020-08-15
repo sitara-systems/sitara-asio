@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <ASIO_ROOT>..\libs\asio-1.11.0</ASIO_ROOT>
+    <ASIO_ROOT>..\libs\asio\asio</ASIO_ROOT>
     <BLOCK_ROOT>..\..\..</BLOCK_ROOT>
     <OSC_ROOT>..\..\..\..\cinder\blocks\osc</OSC_ROOT>
   </PropertyGroup>

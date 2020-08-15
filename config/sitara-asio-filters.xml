@@ -15,67 +15,67 @@
 </Filter>
 
 <ItemGroup>
-<ClCompile Include="..\..\..\..\dependencies\ofxAsio\src\udp\UdpReceiver.cpp">
+<ClCompile Include="..\..\..\..\dependencies\sitara-asio\src\udp\UdpReceiver.cpp">
   <Filter>blocks\sitara-asio\src\udp</Filter>
 </ClCompile>
-<ClCompile Include="..\..\..\..\dependencies\ofxAsio\src\udp\UdpSender.cpp">
+<ClCompile Include="..\..\..\..\dependencies\sitara-asio\src\udp\UdpSender.cpp">
   <Filter>blocks\sitara-asio\src\udp</Filter>
 </ClCompile>
-<ClCompile Include="..\..\..\..\dependencies\ofxAsio\src\udp\UdpSocket.cpp">
+<ClCompile Include="..\..\..\..\dependencies\sitara-asio\src\udp\UdpSocket.cpp">
   <Filter>blocks\sitara-asio\src\udp</Filter>
 </ClCompile>
-<ClCompile Include="..\..\..\..\dependencies\ofxAsio\src\tcp\TcpClient.cpp">
+<ClCompile Include="..\..\..\..\dependencies\sitara-asio\src\tcp\TcpClient.cpp">
   <Filter>blocks\sitara-asio\src\tcp</Filter>
 </ClCompile>
-<ClCompile Include="..\..\..\..\dependencies\ofxAsio\src\tcp\TcpServer.cpp">
+<ClCompile Include="..\..\..\..\dependencies\sitara-asio\src\tcp\TcpServer.cpp">
   <Filter>blocks\sitara-asio\src\tcp</Filter>
 </ClCompile>
-<ClCompile Include="..\..\..\..\dependencies\ofxAsio\src\tcp\TcpSession.cpp">
+<ClCompile Include="..\..\..\..\dependencies\sitara-asio\src\tcp\TcpSession.cpp">
   <Filter>blocks\sitara-asio\src\tcp</Filter>
 </ClCompile>
-<ClCompile Include="..\..\..\..\dependencies\ofxAsio\src\tcp\TcpSocket.cpp">
+<ClCompile Include="..\..\..\..\dependencies\sitara-asio\src\tcp\TcpSocket.cpp">
   <Filter>blocks\sitara-asio\src\tcp</Filter>
 </ClCompile>
 </ItemGroup>
 
 <ItemGroup>
-  <ClInclude Include="..\..\..\..\dependencies\ofxAsio\src\Asio.h">
+  <ClInclude Include="..\..\..\..\dependencies\sitara-asio\src\Asio.h">
     <Filter>blocks\sitara-asio\src</Filter>
   </ClInclude>
-  <ClInclude Include="..\..\..\..\dependencies\ofxAsio\src\Datagram.h">
+  <ClInclude Include="..\..\..\..\dependencies\sitara-asio\src\Datagram.h">
     <Filter>blocks\sitara-asio\src</Filter>
   </ClInclude>
-  <ClInclude Include="..\..\..\..\dependencies\ofxAsio\src\Endpoint.h">
+  <ClInclude Include="..\..\..\..\dependencies\sitara-asio\src\Endpoint.h">
     <Filter>blocks\sitara-asio\src</Filter>
   </ClInclude>
-  <ClInclude Include="..\..\..\..\dependencies\ofxAsio\src\Osc.h">
+  <ClInclude Include="..\..\..\..\dependencies\sitara-asio\src\Osc.h">
     <Filter>blocks\sitara-asio\src</Filter>
   </ClInclude>
-  <ClInclude Include="..\..\..\..\dependencies\ofxAsio\src\Tcp.h">
+  <ClInclude Include="..\..\..\..\dependencies\sitara-asio\src\Tcp.h">
     <Filter>blocks\sitara-asio\src</Filter>
   </ClInclude>
-  <ClInclude Include="..\..\..\..\dependencies\ofxAsio\src\Udp.h">
+  <ClInclude Include="..\..\..\..\dependencies\sitara-asio\src\Udp.h">
     <Filter>blocks\sitara-asio\src</Filter>
   </ClInclude>
-  <ClInclude Include="..\..\..\..\dependencies\ofxAsio\src\udp\UdpReceiver.h">
+  <ClInclude Include="..\..\..\..\dependencies\sitara-asio\src\udp\UdpReceiver.h">
     <Filter>blocks\sitara-asio\src\udp</Filter>
   </ClInclude>
-  <ClInclude Include="..\..\..\..\dependencies\ofxAsio\src\udp\UdpSender.h">
+  <ClInclude Include="..\..\..\..\dependencies\sitara-asio\src\udp\UdpSender.h">
     <Filter>blocks\sitara-asio\src\udp</Filter>
   </ClInclude>
-  <ClInclude Include="..\..\..\..\dependencies\ofxAsio\src\udp\UdpSocket.h">
+  <ClInclude Include="..\..\..\..\dependencies\sitara-asio\src\udp\UdpSocket.h">
     <Filter>blocks\sitara-asio\src\udp</Filter>
   </ClInclude>
-  <ClInclude Include="..\..\..\..\dependencies\ofxAsio\src\tcp\TcpClient.h">
+  <ClInclude Include="..\..\..\..\dependencies\sitara-asio\src\tcp\TcpClient.h">
     <Filter>blocks\sitara-asio\src\tcp</Filter>
   </ClInclude>
-  <ClInclude Include="..\..\..\..\dependencies\ofxAsio\src\tcp\TcpServer.h">
+  <ClInclude Include="..\..\..\..\dependencies\sitara-asio\src\tcp\TcpServer.h">
     <Filter>blocks\sitara-asio\src\tcp</Filter>
   </ClInclude>
-  <ClInclude Include="..\..\..\..\dependencies\ofxAsio\src\tcp\TcpSession.h">
+  <ClInclude Include="..\..\..\..\dependencies\sitara-asio\src\tcp\TcpSession.h">
     <Filter>blocks\sitara-asio\src\tcp</Filter>
   </ClInclude>
-  <ClInclude Include="..\..\..\..\dependencies\ofxAsio\src\tcp\TcpSocket.h">
+  <ClInclude Include="..\..\..\..\dependencies\sitara-asio\src\tcp\TcpSocket.h">
     <Filter>blocks\sitara-asio\src\tcp</Filter>
   </ClInclude>
 </ItemGroup>
