@@ -39,7 +39,7 @@ void TcpClient::disconnect() {
 	std::printf("ofxAsio::sockets::TcpClient -- disconnect");
 }
 
-void TcpClient::send(std::string& message) {
+void TcpClient::send(const std::string& message) {
 	if (!mIsConnected) {
 		std::printf("ofxAsio::sockets::TcpClient -- not connected.\n");
 		return;
