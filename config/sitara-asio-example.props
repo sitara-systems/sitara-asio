@@ -4,7 +4,6 @@
   <PropertyGroup Label="UserMacros">
     <ASIO_ROOT>..\libs\asio\asio</ASIO_ROOT>
     <BLOCK_ROOT>..\..\..</BLOCK_ROOT>
-    <OSC_ROOT>..\..\..\..\cinder\blocks\osc</OSC_ROOT>
   </PropertyGroup>
   <PropertyGroup>
     <_PropertySheetDisplayName>sitara-asio-example</_PropertySheetDisplayName>
@@ -22,9 +21,6 @@
     </BuildMacro>
     <BuildMacro Include="BLOCK_ROOT">
       <Value>$(BLOCK_ROOT)</Value>
-    </BuildMacro>
-    <BuildMacro Include="OSC_ROOT">
-      <Value>$(OSC_ROOT)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>

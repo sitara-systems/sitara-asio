@@ -3,6 +3,7 @@
 #include "asio/asio.hpp"
 #include "Endpoint.h"
 #include <string>
+#include <functional>
 
 namespace sitara {
 	class Datagram {
