@@ -25,6 +25,6 @@ UdpReceiver::~UdpReceiver() {
 }
 
 void UdpReceiver::start() {
-	std::printf("ofxAsio::sockets::UdpReceiver -- listening for messages at %s:%d\n", mLocalEndpoint.getIpAddress().c_str(), mLocalEndpoint.getPort());
+	std::printf("sitara::sockets::UdpReceiver -- listening for messages at %s:%d\n", mLocalEndpoint.getIpAddress().c_str(), mLocalEndpoint.getPort());
 	receive();
 }

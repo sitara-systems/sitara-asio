@@ -16,11 +16,11 @@ TcpSession::TcpSession(asio::io_service& service) : mSocket(service) {
 
 
 TcpSession::~TcpSession() {
-	std::printf("ofxAsio::sockets::TcpSession -- TcpSession ended.\n");
+	std::printf("sitara::sockets::TcpSession -- TcpSession ended.\n");
 }
 
 void TcpSession::start() {
-	std::printf("ofxAsio::sockets::TcpSession -- TcpSession starting.\n");
+	std::printf("sitara::sockets::TcpSession -- TcpSession starting.\n");
 	mIsConnected = true;
 	receive();
 }
@@ -42,15 +42,15 @@ void TcpSession::onWrite(const asio::error_code& error, std::size_t bytesReceive
 		receive();
 	}
 	else {
-		std::printf("ofxAsio::sockets::TcpSession::onWrite -- Error writing data. %s\n", error.message().c_str());;
+		std::printf("sitara::sockets::TcpSession::onWrite -- Error writing data. %s\n", error.message().c_str());;
 	}
 }
 
 void TcpSession::onReceive(const asio::error_code& error, std::size_t bytesReceived) {
 	if (bytesReceived) {
-		std::printf("ofxAsio::sockets::TcpSession::onReceive -- received message %s in %d bytes\n", mIncomingMessage.c_str(), bytesReceived);
+		std::printf("sitara::sockets::TcpSession::onReceive -- received message %s in %d bytes\n", mIncomingMessage.c_str(), bytesReceived);
 		if (mIncomingMessage[bytesReceived - 1] == mTerminator) {
-			std::printf("ofxAsio::sockets::TcpSession::onReceive -- received terminator charactder %s\n", mTerminator);
+			std::printf("sitara::sockets::TcpSession::onReceive -- received terminator charactder %s\n", mTerminator);
 			--bytesReceived;
 			setIncomingBufferSize(bytesReceived);
 			mIsConnected = false;
@@ -64,7 +64,7 @@ void TcpSession::onReceive(const asio::error_code& error, std::size_t bytesRecei
 		});
 	}
 	else {
-		std::printf("ofxAsio::sockets::TcpSession::onReceive -- Error receiving data. %s\n", error.message().c_str());;
+		std::printf("sitara::sockets::TcpSession::onReceive -- Error receiving data. %s\n", error.message().c_str());;
 	}
 }
 

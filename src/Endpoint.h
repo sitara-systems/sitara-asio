@@ -15,7 +15,7 @@ namespace sitara {
 		}
 
 		Endpoint(std::string ipAddress, int port) {
-			mEndpoint = asio::ip::udp::endpoint(asio::ip::address::from_string(ipAddress), port);
+			setEndpoint(ipAddress, port);
 		}
 
 		asio::ip::udp::endpoint getAsioEndpoint() {
@@ -35,7 +35,14 @@ namespace sitara {
 		}
 
 		void setEndpoint(std::string ipAddress, int port) {
-			mEndpoint = asio::ip::udp::endpoint(asio::ip::address::from_string(ipAddress), port);
+			asio::error_code error;
+			auto address = asio::ip::address::from_string(ipAddress, error);
+			if (!error) {
+				mEndpoint = asio::ip::udp::endpoint(address, port);
+			}
+			else {
+				std::printf("sitara::Endpoint::setEndpoint -- Error setting new address. %s\n", error.message().c_str());
+			}
 		}
 
 

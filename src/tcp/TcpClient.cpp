@@ -36,12 +36,12 @@ void TcpClient::disconnect() {
 	mSocket.close();
 	mTimer.cancel();
 	mHeartbeatTimer.cancel();
-	std::printf("ofxAsio::sockets::TcpClient -- disconnect");
+	std::printf("sitara::sockets::TcpClient -- disconnect");
 }
 
 void TcpClient::send(const std::string& message) {
 	if (!mIsConnected) {
-		std::printf("ofxAsio::sockets::TcpClient -- not connected.\n");
+		std::printf("sitara::sockets::TcpClient -- not connected.\n");
 		return;
 	}
 
@@ -54,7 +54,7 @@ void TcpClient::send(const std::string& message) {
 
 void TcpClient::start_connect(asio::ip::tcp::resolver::iterator resolver) {
 	if (resolver != asio::ip::tcp::resolver::iterator()) {
-		std::printf("ofxAsio::sockets::TcpClient -- Trying endpoint %s:%d ...\n", resolver->endpoint().address().to_string().c_str(), resolver->endpoint().port());
+		std::printf("sitara::sockets::TcpClient -- Trying endpoint %s:%d ...\n", resolver->endpoint().address().to_string().c_str(), resolver->endpoint().port());
 		// Set a deadline for the connect operation.
 		mTimer.expires_from_now(std::chrono::seconds(60));
 
@@ -80,7 +80,7 @@ void TcpClient::init() {
 
 void TcpClient::check_deadline(const asio::error_code& error) {
 	if (!mIsConnected) {
-		std::printf("ofxAsio::sockets::TcpClient -- not connected.\n");
+		std::printf("sitara::sockets::TcpClient -- not connected.\n");
 		return;
 	}
 
@@ -88,7 +88,7 @@ void TcpClient::check_deadline(const asio::error_code& error) {
 	// the current time since a new asynchronous operation may have moved the
 	// deadline before this actor had a chance to run.
 	if (mTimer.expires_at() <= std::chrono::system_clock::now()) {
-		std::printf("ofxAsio::sockets::TcpClient -- deadline has passed.\n");
+		std::printf("sitara::sockets::TcpClient -- deadline has passed.\n");
 		// The deadline has passed. The socket is closed so that any outstanding
 		// asynchronous operations are cancelled.
 		mSocket.close();
@@ -106,7 +106,7 @@ void TcpClient::handle_connect(const asio::error_code& ec,
 	asio::ip::tcp::resolver::iterator endpoint_iter)
 {
 	if (!mIsConnected) {
-		std::printf("ofxAsio::sockets::TcpClient -- not connected.\n");
+		std::printf("sitara::sockets::TcpClient -- not connected.\n");
 
 		return;
 	}
@@ -115,7 +115,7 @@ void TcpClient::handle_connect(const asio::error_code& ec,
 	// of the asynchronous operation. If the socket is closed at this time then
 	// the timeout handler must have run first.
 	if (!mSocket.is_open()) {
-		std::printf("ofxAsio::sockets::TcpClient -- Connect timed out\n");
+		std::printf("sitara::sockets::TcpClient -- Connect timed out\n");
 
 		// Try the next available endpoint.
 		start_connect(++endpoint_iter);
@@ -123,7 +123,7 @@ void TcpClient::handle_connect(const asio::error_code& ec,
 
 	// Check if the connect operation failed before the deadline expired.
 	else if (ec) {
-		std::printf("ofxAsio::sockets::TcpClient -- Connect error: %s\n", ec.message().c_str());
+		std::printf("sitara::sockets::TcpClient -- Connect error: %s\n", ec.message().c_str());
 
 		// We need to close the socket used in the previous connection attempt
 		// before starting a new one.
@@ -136,7 +136,7 @@ void TcpClient::handle_connect(const asio::error_code& ec,
 	// Otherwise we have successfully established a connection.
 	else
 	{
-		std::printf("ofxAsio::sockets::TcpClient -- Connected to %s\n", endpoint_iter->endpoint());
+		std::printf("sitara::sockets::TcpClient -- Connected to %s\n", endpoint_iter->endpoint());
 
 		// Start the input actor.
 		start_read();

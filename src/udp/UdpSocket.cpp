@@ -51,7 +51,7 @@ using namespace sitara::udp;
 			}
 		}
 		else{
-			std::printf("asio::UdpSocket::send -- Cannot send data. %s\n", error.message().c_str());;
+			std::printf("sitara::sockets::UdpSocket::send -- Cannot send data. %s\n", error.message().c_str());;
 		}
 	});
   }
@@ -75,7 +75,7 @@ void UdpSocket::onReceive(const asio::error_code &error, size_t bytes_received) 
 		}
 	}
 	else {
-		std::printf("ofxAsio::sockets::UdpSocket::receive -- Error receiving data. %s\n", error.message().c_str());;
+		std::printf("sitara::sockets::UdpSocket::receive -- Error receiving data. %s\n", error.message().c_str());;
 	}
 
 	// queues up the next async receive after this receive has completed.
