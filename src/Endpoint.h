@@ -1,6 +1,7 @@
 #pragma once
 
 #include "asio/asio.hpp"
+#include <iostream>
 #include <string>
 
 namespace sitara {
@@ -41,7 +42,7 @@ namespace sitara {
 				mEndpoint = asio::ip::udp::endpoint(address, port);
 			}
 			else {
-				std::printf("sitara::Endpoint::setEndpoint -- Error setting new address. %s\n", error.message().c_str());
+				std::cout << "sitara::Endpoint::setEndpoint -- Error setting new address : " << error.message() << std::endl;
 			}
 		}
 
