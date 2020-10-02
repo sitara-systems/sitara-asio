@@ -29,9 +29,10 @@ namespace sitara {
 			asio::io_service::work mWork;
 			asio::ip::udp::socket mSocket;
 			Endpoint mLocalEndpoint;
+			std::size_t mMaxBufferSize;
 			std::shared_ptr<Datagram> mIncomingDatagram;
 			asio::ip::udp::endpoint mIncomingEndpoint;
-			std::string mIncomingMessage;
+			std::vector<unsigned char> mIncomingMessage;
 			std::vector<std::function<void(std::shared_ptr<Datagram> msg)> > mOnReceiveFns;
 			std::vector<std::function<void(std::shared_ptr<Datagram> msg)> > mOnSendFns;
 		};
