@@ -6,13 +6,18 @@ As of 2019, I'm only maintaining this library for Cinder.  As it doesn't use any
 
 ## Requirements
 
-### Windows
-See the examples to see how to set it up.  I've provided a property sheet `sitara-asio-example` that encapsulates the settings you'll need to compile it.  `sitara-asio` is the standard property sheet I use for my own projects.
+This library requires the header-only distribution of asio 1.18
 
-### OSX
-This project is currently not configured for Xcode in OSX.  If anyone wants to take this on, I'd be glad to help.  Otherwise you'll have to wait until I have a reason to need it on my Mac :)
+The included `vcpkg.json` should automatically download and build the dependencies for all examples in here.  This block also requires cinder to be in an adjacent folder for the cinder dependencies to be found automatically:
+
+    parentFolder/
+        sitara-asio/
+        cinder/
+
+Use the included `vcpkg.json` as a jumping off point for adding this block into other projects!
 
 ## Usage
+
 `sitara-asio` is a a relatively minimal wrapper around the Asio library to try to make networking easier.  There are two main classes, one for sending UDP messages (`UdpSender`) and one for receiving UDP messages (`UdpReceiver`).
 
 Both should be created as such:
@@ -35,7 +40,9 @@ In addition, just like a normal `std::vector`, you can `push_back()` into the `D
 Both `UdpSender` and `UdpReceiver` send and receive asynchronously, so the preferred way to deal with the results is to use callbacks.  With both classes you can attach a function callback that accepts a `std::shared_ptr<Datagram>` via the functions `addOnReceiveFn()` and `addOnSendFn()`.  If you're not sure what I'm talking about, check out the examples.
 
 ## Contributing
+
 This project uses the [Git Flow](http://nvie.com/posts/a-successful-git-branching-model/) paradigm.  Before contributing, please make your own feature branch with your changes.
 
 ## More Information
-* [Asio Homepage](http://think-async.com/)
+
+-   [Asio Homepage](http://think-async.com/)
