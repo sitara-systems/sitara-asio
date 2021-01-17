@@ -1,4 +1,5 @@
-#include "UdpReceiver.h"
+#include "udp/UdpReceiver.h"
+#include <iostream>
 
 using namespace sitara;
 using namespace sitara::udp;
@@ -25,6 +26,6 @@ UdpReceiver::~UdpReceiver() {
 }
 
 void UdpReceiver::start() {
-	std::printf("sitara::sockets::UdpReceiver -- listening for messages at %s:%d\n", mLocalEndpoint.getIpAddress().c_str(), mLocalEndpoint.getPort());
+	std::cout << "sitara::sockets::UdpReceiver -- listening for messages at " << mLocalEndpoint.getIpAddress() << ":" << mLocalEndpoint.getPort() << std::endl;
 	receive();
 }

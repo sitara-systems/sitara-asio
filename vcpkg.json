@@ -1,0 +1,14 @@
+{
+	"name": "sitara-asio",
+	"version-string": "v0.1",
+	"port-version": 0,
+	"description": [
+		"Block for using asio for network communications",
+        "Copy the dependencies below to your manifest file."
+	],
+	"homepage": "https://github.com/sitara-systems/sitara-asio",
+	"documentation": "",
+	"maintainers": [
+		"Nathan Lachenmyer <nathan@sitara.systems>"
+	]
+}

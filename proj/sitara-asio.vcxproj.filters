@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\tcp">
+      <UniqueIdentifier>{85598bdb-cc4b-4aa9-83f6-fdb9f2ba84ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\udp">
+      <UniqueIdentifier>{923a87de-0591-42f5-bd1b-8ad811240ee0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\tcp">
+      <UniqueIdentifier>{42b9ad71-9ca2-45cd-a1f9-6138ab277916}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\udp">
+      <UniqueIdentifier>{5dcf694d-68e4-42c1-85f3-d4ca81a59bf9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Asio.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Datagram.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Endpoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Tcp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Udp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\tcp\TcpClient.h">
+      <Filter>Header Files\tcp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\tcp\TcpServer.h">
+      <Filter>Header Files\tcp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\tcp\TcpSession.h">
+      <Filter>Header Files\tcp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\tcp\TcpSocket.h">
+      <Filter>Header Files\tcp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\udp\UdpReceiver.h">
+      <Filter>Header Files\udp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\udp\UdpSender.h">
+      <Filter>Header Files\udp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\udp\UdpSocket.h">
+      <Filter>Header Files\udp</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="sitara-asio.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\tcp\TcpSocket.cpp">
+      <Filter>Source Files\tcp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\tcp\TcpClient.cpp">
+      <Filter>Source Files\tcp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\tcp\TcpServer.cpp">
+      <Filter>Source Files\tcp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\tcp\TcpSession.cpp">
+      <Filter>Source Files\tcp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\udp\UdpSocket.cpp">
+      <Filter>Source Files\udp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\udp\UdpReceiver.cpp">
+      <Filter>Source Files\udp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\udp\UdpSender.cpp">
+      <Filter>Source Files\udp</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
