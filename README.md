@@ -6,7 +6,7 @@ As of 2019, I'm only maintaining this library for Cinder.  As it doesn't use any
 
 ## Requirements
 
-This library requires the header-only distribution of asio 1.18
+This library currently runs off of asio 1.11; it runs off of the version included in cinder, but can be easily adaptered for newer version by using the `vcpkg.json` file.
 
 The included `vcpkg.json` should automatically download and build the dependencies for all examples in here.  This block also requires cinder to be in an adjacent folder for the cinder dependencies to be found automatically:
 

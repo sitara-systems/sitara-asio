@@ -32,6 +32,7 @@
   <ImportGroup Label="ExtensionSettings" />
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\config\sitara-asio-example.props" />
   </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -42,6 +43,15 @@
     <_ProjectFileVersion>10.0.30319.1</_ProjectFileVersion>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnableManifest>true</VcpkgEnableManifest>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <VcpkgUseStatic>true</VcpkgUseStatic>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <VcpkgUseStatic>true</VcpkgUseStatic>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -105,29 +115,9 @@
   <ItemGroup />
   <ItemGroup>
     <ClCompile Include="..\src\exampleTcpAppApp.cpp" />
-    <ClCompile Include="..\..\..\src\tcp\TcpClient.cpp" />
-    <ClCompile Include="..\..\..\src\tcp\TcpServer.cpp" />
-    <ClCompile Include="..\..\..\src\tcp\TcpSession.cpp" />
-    <ClCompile Include="..\..\..\src\tcp\TcpSocket.cpp" />
-    <ClCompile Include="..\..\..\src\udp\UdpReceiver.cpp" />
-    <ClCompile Include="..\..\..\src\udp\UdpSender.cpp" />
-    <ClCompile Include="..\..\..\src\udp\UdpSocket.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h" />
-    <ClInclude Include="..\..\..\src\Asio.h" />
-    <ClInclude Include="..\..\..\src\Datagram.h" />
-    <ClInclude Include="..\..\..\src\Endpoint.h" />
-    <ClInclude Include="..\..\..\src\Osc.h" />
-    <ClInclude Include="..\..\..\src\Tcp.h" />
-    <ClInclude Include="..\..\..\src\tcp\TcpClient.h" />
-    <ClInclude Include="..\..\..\src\tcp\TcpServer.h" />
-    <ClInclude Include="..\..\..\src\tcp\TcpSession.h" />
-    <ClInclude Include="..\..\..\src\tcp\TcpSocket.h" />
-    <ClInclude Include="..\..\..\src\Udp.h" />
-    <ClInclude Include="..\..\..\src\udp\UdpReceiver.h" />
-    <ClInclude Include="..\..\..\src\udp\UdpSender.h" />
-    <ClInclude Include="..\..\..\src\udp\UdpSocket.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

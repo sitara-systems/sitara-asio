@@ -1,20 +1,5 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="blocks">
-      <UniqueIdentifier>{8c84f69b-8f02-44f1-8230-431a645abf01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="blocks\sitara-asio">
-      <UniqueIdentifier>{4780ae09-d171-41e6-bf81-ba1c09795a90}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="blocks\sitara-asio\src">
-      <UniqueIdentifier>{8cf74441-8d1f-4776-a44f-acff8e1942a7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="blocks\sitara-asio\src\udp">
-      <UniqueIdentifier>{9a346aa0-99b3-4d16-b727-ea5e56b431d1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="blocks\sitara-asio\src\tcp">
-      <UniqueIdentifier>{7af9a641-4bd8-4132-9ac4-8762580c3548}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
@@ -35,27 +20,6 @@
     <ClCompile Include="..\src\exampleUdpAppApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\udp\UdpReceiver.cpp">
-      <Filter>blocks\sitara-asio\src\udp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\udp\UdpSender.cpp">
-      <Filter>blocks\sitara-asio\src\udp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\udp\UdpSocket.cpp">
-      <Filter>blocks\sitara-asio\src\udp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\tcp\TcpClient.cpp">
-      <Filter>blocks\sitara-asio\src\tcp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\tcp\TcpServer.cpp">
-      <Filter>blocks\sitara-asio\src\tcp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\tcp\TcpSession.cpp">
-      <Filter>blocks\sitara-asio\src\tcp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\src\tcp\TcpSocket.cpp">
-      <Filter>blocks\sitara-asio\src\tcp</Filter>
-    </ClCompile>
     <ClInclude Include="..\include\Resources.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -63,45 +27,6 @@
   <ItemGroup>
     <ClInclude Include="..\include\Resources.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\Asio.h">
-      <Filter>blocks\sitara-asio\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\Datagram.h">
-      <Filter>blocks\sitara-asio\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\Endpoint.h">
-      <Filter>blocks\sitara-asio\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\Osc.h">
-      <Filter>blocks\sitara-asio\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\Tcp.h">
-      <Filter>blocks\sitara-asio\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\Udp.h">
-      <Filter>blocks\sitara-asio\src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\udp\UdpReceiver.h">
-      <Filter>blocks\sitara-asio\src\udp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\udp\UdpSender.h">
-      <Filter>blocks\sitara-asio\src\udp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\udp\UdpSocket.h">
-      <Filter>blocks\sitara-asio\src\udp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\tcp\TcpClient.h">
-      <Filter>blocks\sitara-asio\src\tcp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\tcp\TcpServer.h">
-      <Filter>blocks\sitara-asio\src\tcp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\tcp\TcpSession.h">
-      <Filter>blocks\sitara-asio\src\tcp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\src\tcp\TcpSocket.h">
-      <Filter>blocks\sitara-asio\src\tcp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

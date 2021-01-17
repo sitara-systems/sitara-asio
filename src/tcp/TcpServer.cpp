@@ -1,4 +1,4 @@
-#include "TcpServer.h"
+#include "tcp/TcpServer.h"
 
 using namespace sitara;
 using namespace sitara::tcp;
