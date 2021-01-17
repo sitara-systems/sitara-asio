@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros">
-    <ASIO_ROOT>\libs\asio\asio</ASIO_ROOT>
     <SITARA_ASIO_ROOT>..\..\..\..\dependencies\sitara-asio</SITARA_ASIO_ROOT>
   </PropertyGroup>
   <PropertyGroup>
@@ -10,15 +9,14 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(SITARA_ASIO_ROOT)\src;$(SITARA_ASIO_ROOT)$(ASIO_ROOT)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SITARA_ASIO_ROOT)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions> ASIO_HAS_STD_ARRAY;ASIO_HAS_STD_ATOMIC;ASIO_HAS_STD_TYPE_TRAITS;ASIO_HAS_CSTDINT;ASIO_HAS_STD_ADDRESSOF;ASIO_HAS_STD_SHARED_PTR;_WIN32_WINNT=0x0602;ASIO_STANDALONE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
+    <Link>
+      <AdditionalDependencies>sitara-asio.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <BuildMacro Include="ASIO_ROOT">
-      <Value>$(ASIO_ROOT)</Value>
-      <EnvironmentVariable>true</EnvironmentVariable>
-    </BuildMacro>
     <BuildMacro Include="SITARA_ASIO_ROOT">
       <Value>$(SITARA_ASIO_ROOT)</Value>
     </BuildMacro>
