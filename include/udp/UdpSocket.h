@@ -19,9 +19,9 @@ namespace sitara {
 			void setIncomingBufferSize(std::size_t buffer_size);
 			void addOnReceiveFn(std::function<void(std::shared_ptr<Datagram> msg)> response);
 			void addOnSendFn(std::function<void(std::shared_ptr<Datagram> msg)> response);
-			const Endpoint& getEndpoint();
-			const std::string& getIpAddress();
-			const int& getPortNumber();
+			Endpoint getEndpoint();
+			std::string getIpAddress();
+			int getPortNumber();
 		protected:
 			void init();
 			void sendDatagram(std::shared_ptr<Datagram> msg);

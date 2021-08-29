@@ -91,14 +91,14 @@ void UdpSocket::addOnSendFn(std::function<void(std::shared_ptr<Datagram> msg)> r
 	mOnSendFns.push_back(response);
 }
 
-const Endpoint& UdpSocket::getEndpoint() {
+Endpoint UdpSocket::getEndpoint() {
 	return mLocalEndpoint;
 }
 
-const std::string& UdpSocket::getIpAddress() {
+std::string UdpSocket::getIpAddress() {
 	return mLocalEndpoint.getIpAddress();
 }
 
-const int& UdpSocket::getPortNumber() {
+int UdpSocket::getPortNumber() {
 	return mLocalEndpoint.getPort();
 }
