@@ -90,3 +90,15 @@ void UdpSocket::addOnReceiveFn(std::function<void(std::shared_ptr<Datagram> msg)
 void UdpSocket::addOnSendFn(std::function<void(std::shared_ptr<Datagram> msg)> response) {
 	mOnSendFns.push_back(response);
 }
+
+const Endpoint& UdpSocket::getEndpoint() {
+	return mLocalEndpoint;
+}
+
+const std::string& UdpSocket::getIpAddress() {
+	return mLocalEndpoint.getIpAddress();
+}
+
+const int& UdpSocket::getPortNumber() {
+	return mLocalEndpoint.getPort();
+}
