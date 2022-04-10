@@ -22,33 +22,35 @@
 
 #pragma once
 
-#include "asio/asio.hpp"
-#include "../Endpoint.h"
-#include "../Datagram.h"
-#include <memory>
-#include <thread>
 #include <array>
+#include <memory>
 #include <string>
+#include <thread>
+
+#include "../Datagram.h"
+#include "../Endpoint.h"
+#include "asio/asio.hpp"
 
 namespace sitara {
-	namespace tcp {
-		class TcpSocket {
-		public:
-			TcpSocket();
-			TcpSocket(int port);
-			TcpSocket(std::string localAddress, int port);
-			~TcpSocket();
-		protected:
-			void init();
-			asio::io_service mService;
-			std::thread mServiceThread;
-			asio::io_service::work mWork;
-			asio::ip::tcp::socket mSocket;
-			asio::ip::tcp::endpoint mLocalEndpoint;
-			std::shared_ptr<Datagram> mIncomingDatagram;
-			asio::ip::tcp::endpoint mIncomingEndpoint;
-			std::string mIncomingMessage;
-		};
+namespace tcp {
+class TcpSocket {
+   public:
+    TcpSocket();
+    TcpSocket(int port);
+    TcpSocket(std::string localAddress, int port);
+    ~TcpSocket();
 
-	}
-}
+   protected:
+    void init();
+    asio::io_service mService;
+    std::thread mServiceThread;
+    asio::io_service::work mWork;
+    asio::ip::tcp::socket mSocket;
+    asio::ip::tcp::endpoint mLocalEndpoint;
+    std::shared_ptr<Datagram> mIncomingDatagram;
+    asio::ip::tcp::endpoint mIncomingEndpoint;
+    std::string mIncomingMessage;
+};
+
+}  // namespace tcp
+}  // namespace sitara
