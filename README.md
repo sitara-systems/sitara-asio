@@ -1,5 +1,7 @@
 # sitara-asio
 
+[![Format and Lint Code](https://github.com/sitara-systems/sitara-asio/actions/workflows/super-linter.yml/badge.svg)](https://github.com/sitara-systems/sitara-asio/actions/workflows/super-linter.yml)
+
 A wrapper to simplify using the Asio library for asynchronous networking in
 openFrameworks and Cinder. I created this addon because I was frustrated with
 the limitations of `ofxUdpManager` and wanted something a bit more robust. In
